@@ -1,7 +1,7 @@
 # Stimulus Autocomplete controller
 
-This is a stimulus controller to make a selection from a list that is too large
-to load in the browser.
+This is a tiny stimulus controller (1.5kB gzipped) to make a selection from a
+list that is too large to load in the browser.
 
 ![Demo](https://media.giphy.com/media/5dYbYLVX4fSbbdyN84/giphy.gif)
 

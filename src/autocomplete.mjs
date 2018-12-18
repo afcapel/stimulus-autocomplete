@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus'
-import { debounce } from 'lodash'
+import debounce from 'lodash.debounce'
 
 export default class extends Controller {
   static targets = [ 'input', 'hidden', 'results' ]
@@ -53,7 +53,6 @@ export default class extends Controller {
     target.setAttribute('aria-selected', 'true')
     target.classList.add('active')
     this.inputTarget.setAttribute('aria-activedescendant', target.id)
-    scrollTo(this.results, target)
   }
 
   onKeydown(event) {
@@ -74,20 +73,6 @@ export default class extends Controller {
         break
       case 'ArrowUp':
         {
-          const item = this.sibling(false)
-          if (item) this.select(item)
-          event.preventDefault()
-        }
-        break
-      case 'n':
-        if (ctrlBindings && event.ctrlKey) {
-          const item = this.sibling(true)
-          if (item) this.select(item)
-          event.preventDefault()
-        }
-        break
-      case 'p':
-        if (ctrlBindings && event.ctrlKey) {
           const item = this.sibling(false)
           if (item) this.select(item)
           event.preventDefault()
@@ -131,8 +116,9 @@ export default class extends Controller {
       return
     }
 
-    const value = selected.getAttribute('data-autocomplete-value') || selected.textContent
-    this.inputTarget.value = selected.textContent
+    const textValue = selected.textContent.trim()
+    const value = selected.getAttribute('data-autocomplete-value') || textValue
+    this.inputTarget.value = textValue
 
     if ( this.hiddenTarget ) {
       this.hiddenTarget.value = value
@@ -140,6 +126,7 @@ export default class extends Controller {
       this.inputTarget.value = value
     }
 
+    this.inputTarget.focus()
     this.resultsTarget.hidden = true
   }
 
