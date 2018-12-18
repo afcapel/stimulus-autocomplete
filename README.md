@@ -5,7 +5,29 @@ list a list of result fetched from the server.
 
 ![Demo](https://media.giphy.com/media/5dYbYLVX4fSbbdyN84/giphy.gif)
 
+## Installation
+
+`yarn add stimulus-autocomplete`
+
 ## Usage
+
+Load your stimulus application as usual and the register the autocomplete
+controller with it:
+
+```
+import { Application } from 'stimulus'
+import { definitionsFromContext } from 'stimulus/webpack-helpers'
+import { Autocomplete } from 'stimulus-autocomplete'
+
+const application = Application.start()
+
+const context = require.context('controllers', true, /.js$/)
+application.load(definitionsFromContext(context))
+
+application.register('autocomplete', Autocomplete)
+```
+
+To use the autocomplete, you need some markup as follows:
 
 ```html
 <div data-controller="autocomplete" data-autocomplete-url="/birds/search">
