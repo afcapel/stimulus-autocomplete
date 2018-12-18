@@ -1,7 +1,7 @@
 # Stimulus Autocomplete controller
 
 This is a tiny stimulus controller (1.5kB gzipped) to make a selection from a
-list a list of result fetched from the server.
+list of results fetched from the server.
 
 ![Demo](https://media.giphy.com/media/5dYbYLVX4fSbbdyN84/giphy.gif)
 
@@ -27,7 +27,7 @@ application.load(definitionsFromContext(context))
 application.register('autocomplete', Autocomplete)
 ```
 
-To use the autocomplete, you need some markup as follows:
+To use the autocomplete, you need some markup as this:
 
 ```html
 <div data-controller="autocomplete" data-autocomplete-url="/birds/search">
