@@ -51,6 +51,9 @@ of the selected option. Otherwise, the search text field will be updated.
 
 ## Events
 
+* `autocomplete.change` fires when the users selects a new value from the autocomplete
+field. The event `detail` contains the `value` and `textValue` properties of the
+selected result.
 * `loadstart` fires before the autocomplete fetches the results from the server.
 * `load` fires when results have been successfully loaded.
 * `error` fires when there's an error fetching the results.
