@@ -164,6 +164,10 @@ export default class extends Controller {
       this.resultsTarget.hidden = true
       return
     }
+    if (query.length < this.minLength) {
+      this.resultsTarget.hidden = true
+      return
+    }
 
     if (!this.src) return
 
@@ -207,5 +211,13 @@ export default class extends Controller {
 
   get src() {
     return this.data.get("url")
+  }
+
+  get minLength() {
+    const minLength = this.data.get("min-length")
+    if ( !minLength ) {
+      return 0
+    }
+    return parseInt(minLength, 10)
   }
 }

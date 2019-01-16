@@ -60,6 +60,10 @@ selected result.
 * `loadend` fires when the request for results ends, successfully or not.
 * `toggle` fires when the results element is shown or hidden.
 
+## Optional parameters
+
+* `min-length` set the minimum number of charaters required to make an autocomplete request.
+
 ## Credits
 
 Heavily inspired on [github's autocomplete element](https://github.com/github/auto-complete-element).
