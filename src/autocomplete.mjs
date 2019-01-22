@@ -1,5 +1,6 @@
 import { Controller } from 'stimulus'
 import debounce from 'lodash.debounce'
+import keycode from 'keycode'
 
 export default class extends Controller {
   static targets = [ 'input', 'hidden', 'results' ]
@@ -56,29 +57,29 @@ export default class extends Controller {
   }
 
   onKeydown(event) {
-    switch (event.key) {
-      case 'Escape':
+    switch (keycode(event)) {
+      case 'esc':
         if (!this.resultsTarget.hidden) {
           this.resultsTarget.hidden = true
           event.stopPropagation()
           event.preventDefault()
         }
         break
-      case 'ArrowDown':
+      case 'down':
         {
           const item = this.sibling(true)
           if (item) this.select(item)
           event.preventDefault()
         }
         break
-      case 'ArrowUp':
+      case 'up':
         {
           const item = this.sibling(false)
           if (item) this.select(item)
           event.preventDefault()
         }
         break
-      case 'Tab':
+      case 'tab':
         {
           const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
           if (selected) {
@@ -86,7 +87,7 @@ export default class extends Controller {
           }
         }
         break
-      case 'Enter':
+      case 'enter':
         {
           const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
           if (selected && !this.resultsTarget.hidden) {
