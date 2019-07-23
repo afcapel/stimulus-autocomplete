@@ -120,7 +120,7 @@ export default class extends Controller {
     const value = selected.getAttribute('data-autocomplete-value') || textValue
     this.inputTarget.value = textValue
 
-    if ( this.hiddenTarget ) {
+    if ( this.hasHiddenTarget ) {
       this.hiddenTarget.value = value
     } else {
       this.inputTarget.value = value
