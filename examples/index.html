@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <title>Stimulus Autocomplete</title>
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 
   <style>
     .form-group {
@@ -13,7 +14,7 @@
     }
   </style>
 
-  <script src="../assets/app.js"></script>
+  <script src="./app.js"></script>
 </head>
 
 <body>
@@ -23,8 +24,8 @@
     <div class="form-group">
       <label for="exampleInputEmail1">Bird</label>
       <div data-controller="autocomplete" data-autocomplete-url="/examples/results.html">
-        <input type="text" class="form-control" data-target="autocomplete.input" placeholder="search a bird"/>
-        <input type="hidden" name="bird_id" data-target="autocomplete.hidden"/>
+        <input type="text" class="form-control" data-target="autocomplete.input" placeholder="search a bird" />
+        <input type="hidden" name="bird_id" data-target="autocomplete.hidden" />
         <ul data-target="autocomplete.results" class="list-group"></ul>
       </div>
     </div>
