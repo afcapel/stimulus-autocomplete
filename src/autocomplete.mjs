@@ -49,10 +49,10 @@ export default class extends Controller {
   select(target) {
     for (const el of this.resultsTarget.querySelectorAll('[aria-selected="true"]')) {
       el.removeAttribute('aria-selected')
-      el.classList.remove('active')
+      el.classList.remove(...this.activeClassList)
     }
     target.setAttribute('aria-selected', 'true')
-    target.classList.add('active')
+    target.classList.add(...this.activeClassList)
     this.inputTarget.setAttribute('aria-activedescendant', target.id)
   }
 
@@ -209,6 +209,11 @@ export default class extends Controller {
     this.inputTarget.removeAttribute('aria-activedescendant')
     this.element.setAttribute('aria-expanded', 'false')
     this.element.dispatchEvent(new CustomEvent('toggle', {detail: {input: this.input, results: this.results}}))
+  }
+
+  get activeClassList() {
+    const classString = this.data.has('active-class') ? this.data.get('active-class') : 'active';
+    return classString.split(' ').map(s => s.trim()).filter(s => s != null && s != "")
   }
 
   get src() {

@@ -63,6 +63,14 @@ selected result.
 ## Optional parameters
 
 * `min-length` set the minimum number of charaters required to make an autocomplete request.
+* `active-class` set which class is used when an element is selected. Can be a list of classes.  Default: `active`.
+
+For example:
+
+```html
+<div data-controller="autocomplete" data-autocomplete-min-length="2" data-autocomplete-active-class="bg-blue-200 text-blue-800">
+</div>
+```
 
 ## Credits
 
