@@ -175,7 +175,7 @@ export default class extends Controller {
 
     const url = new URL(this.src, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
-    params.append('q', query)
+    params.append(this.queryParam, query)
     url.search = params.toString()
 
     this.element.dispatchEvent(new CustomEvent('loadstart'))
@@ -218,6 +218,10 @@ export default class extends Controller {
   get activeClassList() {
     const classString = this.data.has('active-class') ? this.data.get('active-class') : 'active';
     return classString.split(' ').map(s => s.trim()).filter(s => s != null && s != "")
+  }
+
+  get queryParam() {
+    return this.data.has('query') ? this.data.get('query') : 'q'
   }
 
   get src() {

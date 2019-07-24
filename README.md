@@ -90,6 +90,9 @@ selected result.
 
 * `min-length` set the minimum number of charaters required to make an autocomplete request.
 * `active-class` set which class is used when an element is selected. Can be a list of classes.  Default: `active`.
+* `query-param` set what to use as the query param on the autocomplete url. Default: `q`
+
+NOTE: All optional parameters are data-properties, prefixed as `data-autocomplete-OPTION`.
 
 For example:
 
