@@ -181,7 +181,7 @@ export default class extends Controller {
     this.element.dispatchEvent(new CustomEvent('loadstart'))
 
     fetch(url.toString())
-      .then(response => response.text())
+      .then(response => this.handleAutocompleteResponse(response))
       .then(html => {
         this.resultsTarget.innerHTML = html
         this.identifyOptions()
@@ -194,6 +194,10 @@ export default class extends Controller {
         this.element.dispatchEvent(new CustomEvent('error'))
         this.element.dispatchEvent(new CustomEvent('loadend'))
       })
+  }
+
+  handleAutocompleteResponse(response) {
+    return response.text()
   }
 
   open() {

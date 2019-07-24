@@ -49,6 +49,32 @@ the contents of the input field. The server must answer with an html fragment:
 If the controller has a `hidden` target, that field will be updated with the value
 of the selected option. Otherwise, the search text field will be updated.
 
+## Using with a JSON API
+
+If you do not control the API response to format the data into the required format,
+you can subclass the autocomplete controller and define a `handleAutocompleteResponse`
+method, which receives a [`fetch` response](https://developer.mozilla.org/en-US/docs/Web/API/Response) as it's only parameter.
+
+This method must return HTML in the format described above, or similar format that
+has the tags `role="option"` and `data-autocomplete-value="..."`
+
+For example:
+
+```js
+// autocomplete_controller.js
+import { Autocomplete } from "stimulus-autocomplete"
+
+export default class extends Autocomplete {
+  async handleAutocompleteResponse(response) {
+    const json = await response.json()
+
+    return json.map(item => {
+      return `<li role="option" data-autocomplete-value="${item.id}">${item.name}</li>`
+    });
+  }
+}
+```
+
 ## Events
 
 * `autocomplete.change` fires when the users selects a new value from the autocomplete
