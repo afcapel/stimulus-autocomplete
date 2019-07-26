@@ -119,7 +119,8 @@ export default class extends Controller {
 
     const textValue = selected.textContent.trim()
     const value = selected.getAttribute('data-autocomplete-value') || textValue
-    this.inputTarget.value = textValue
+
+    this.onSelect(selected, textValue, value)
 
     if ( this.hasHiddenTarget ) {
       this.hiddenTarget.value = value
@@ -134,6 +135,10 @@ export default class extends Controller {
 
     this.inputTarget.focus()
     this.hideAndRemoveOptions()
+  }
+
+  onSelect(selected, textValue, value) {
+    this.inputTarget.value = selected.textContent.trim()
   }
 
   onResultsClick(event) {

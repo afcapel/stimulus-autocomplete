@@ -49,7 +49,7 @@ the contents of the input field. The server must answer with an html fragment:
 If the controller has a `hidden` target, that field will be updated with the value
 of the selected option. Otherwise, the search text field will be updated.
 
-## Using with a JSON API
+## Using with an external API or a JSON API
 
 If you do not control the API response to format the data into the required format,
 you can subclass the autocomplete controller and define a `handleAutocompleteResponse`
@@ -71,6 +71,28 @@ export default class extends Autocomplete {
     return json.map(item => {
       return `<li role="option" data-autocomplete-value="${item.id}">${item.name}</li>`
     });
+  }
+}
+```
+
+While the style above works nicely, consider using template tags for reusable code.
+
+## Handling selection presentation
+
+To modify how the plugin reacts when an item is selected, simply define `onSelect`
+in your autocomplete controller.
+
+For example,
+
+```js
+// autocomplete_controller.js
+import { Autocomplete } from "stimulus-autocomplete"
+
+export default class extends Autocomplete {
+  onSelect(selectedItem) {
+    const value = selectedItem.textContent.trim()
+
+    alert(`You selected ${value}`)
   }
 }
 ```
