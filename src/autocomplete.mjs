@@ -59,7 +59,7 @@ export default class extends Controller {
     switch (event.key) {
       case 'Escape':
         if (!this.resultsTarget.hidden) {
-          this.resultsTarget.hidden = true
+          this.hideAndRemoveOptions()
           event.stopPropagation()
           event.preventDefault()
         }
@@ -132,7 +132,7 @@ export default class extends Controller {
     }))
 
     this.inputTarget.focus()
-    this.resultsTarget.hidden = true
+    this.hideAndRemoveOptions()
   }
 
   onResultsClick(event) {
@@ -158,14 +158,15 @@ export default class extends Controller {
     }
   }
 
+  hideAndRemoveOptions() {
+    this.resultsTarget.hidden = true
+    this.resultsTarget.innerHTML = null
+  }
+
   fetchResults() {
     const query = this.inputTarget.value.trim()
-    if (!query) {
-      this.resultsTarget.hidden = true
-      return
-    }
-    if (query.length < this.minLength) {
-      this.resultsTarget.hidden = true
+    if (!query || query.length < this.minLength) {
+      this.hideAndRemoveOptions()
       return
     }
 
