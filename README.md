@@ -64,6 +64,16 @@ selected result.
 
 * `min-length` set the minimum number of charaters required to make an autocomplete request.
 
+## Examples
+
+There's a minimal example in the `examples` directory. To run it:
+
+```
+$ cd examples
+$ yarn install
+$ yarn run start
+```
+
 ## Credits
 
 Heavily inspired on [github's autocomplete element](https://github.com/github/auto-complete-element).

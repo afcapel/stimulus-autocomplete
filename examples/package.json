@@ -1,0 +1,21 @@
+{
+  "name": "stimulus-autocomplete-example",
+  "version": "1.2.1",
+  "description": "StimulusJS autocomplete component example",
+  "author": "Alberto Fernández-Capel <afcapel@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "homepage": "https://github.com/afcapel/stimulus-autocomplete",
+  "dependencies": {
+    "stimulus-autocomplete": "^1.2.1"
+  },
+  "devDependencies": {
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6",
+    "webpack-dev-server": "^3.7.2"
+  },
+  "scripts": {
+    "start": "webpack-dev-server --config webpack.dev.js --mode development"
+  }
+}

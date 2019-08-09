@@ -1,5 +1,5 @@
 import { Application } from 'stimulus'
-import { AutocompleteController } from '../index'
+import { Autocomplete } from 'stimulus-autocomplete'
 
 const application = Application.start()
-application.register('autocomplete', AutocompleteController)
+application.register('autocomplete', Autocomplete)

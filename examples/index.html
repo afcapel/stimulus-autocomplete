@@ -12,8 +12,6 @@
       max-width: 300px;
     }
   </style>
-
-  <script src="../assets/app.js"></script>
 </head>
 
 <body>
@@ -22,7 +20,7 @@
 
     <div class="form-group">
       <label for="exampleInputEmail1">Bird</label>
-      <div data-controller="autocomplete" data-autocomplete-url="/examples/results.html">
+      <div data-controller="autocomplete" data-autocomplete-url="/results.html">
         <input type="text" class="form-control" data-target="autocomplete.input" placeholder="search a bird"/>
         <input type="hidden" name="bird_id" data-target="autocomplete.hidden"/>
         <ul data-target="autocomplete.results" class="list-group"></ul>
