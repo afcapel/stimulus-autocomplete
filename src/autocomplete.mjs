@@ -120,13 +120,13 @@ export default class extends Controller {
       this.inputTarget.value = value
     }
 
+    this.inputTarget.focus()
+    this.hideAndRemoveOptions()
+
     this.element.dispatchEvent(new CustomEvent('autocomplete.change', {
       bubbles: true,
       detail: { value: value, textValue: textValue }
     }))
-
-    this.inputTarget.focus()
-    this.hideAndRemoveOptions()
   }
 
   onResultsClick(event) {
