@@ -16,11 +16,9 @@ export default class extends Controller {
     this.onResultsClick = this.onResultsClick.bind(this)
     this.onResultsMouseDown = this.onResultsMouseDown.bind(this)
     this.onInputBlur = this.onInputBlur.bind(this)
-    this.onInputFocus = this.onInputFocus.bind(this)
     this.onKeydown = this.onKeydown.bind(this)
 
     this.inputTarget.addEventListener('keydown', this.onKeydown)
-    this.inputTarget.addEventListener('focus', this.onInputFocus)
     this.inputTarget.addEventListener('blur', this.onInputBlur)
     this.inputTarget.addEventListener('input', this.onInputChange)
     this.resultsTarget.addEventListener('mousedown', this.onResultsMouseDown)
@@ -96,10 +94,6 @@ export default class extends Controller {
         }
         break
     }
-  }
-
-  onInputFocus() {
-    this.fetchResults()
   }
 
   onInputBlur() {
