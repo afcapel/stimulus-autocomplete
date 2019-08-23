@@ -22,5 +22,21 @@ module.exports = {
       chunks: ["results"],
       filename: "results.html"
     })
-  ]
+  ],
+
+  module: {
+    rules: [
+      {
+        loader: 'babel-loader',
+        test: /\.m?js$/,
+        type: "javascript/auto",
+        options: {
+          presets: [
+            '@babel/preset-env',{
+            'plugins': ['@babel/plugin-proposal-class-properties']
+          }]
+        }
+      }
+    ]
+  }
 };
