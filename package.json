@@ -2,8 +2,9 @@
   "name": "stimulus-autocomplete",
   "version": "1.4.0",
   "description": "StimulusJS autocomplete component",
-  "main": "dist/stimulus-autocomplete.js",
-  "source": "src/index.mjs",
+  "source": "src/index.js",
+  "main": "dist/stimulus-autocomplete.esm.js",
+  "module": "dist/stimulus-autocomplete.esm.js",
   "author": "Alberto Fernández-Capel <afcapel@gmail.com>",
   "license": "MIT",
   "private": false,
@@ -26,10 +27,11 @@
     "stimulus": "^1.1.0"
   },
   "devDependencies": {
-    "microbundle": "^0.8.4"
-  },
-  "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch"
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "rollup": "^1.25.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0"
   }
 }
