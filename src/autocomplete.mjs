@@ -2,7 +2,7 @@ import { Controller } from 'stimulus'
 import debounce from 'lodash.debounce'
 
 export default class extends Controller {
-  static targets = [ 'input', 'hidden', 'results' ]
+  static targets = [ 'input', 'hidden', 'results', 'clear' ]
 
   connect() {
     this.resultsTarget.hidden = true
@@ -23,6 +23,11 @@ export default class extends Controller {
     this.inputTarget.addEventListener('input', this.onInputChange)
     this.resultsTarget.addEventListener('mousedown', this.onResultsMouseDown)
     this.resultsTarget.addEventListener('click', this.onResultsClick)
+
+    if (this.hasClearTarget) {
+      this.onClearClick = this.onClearClick.bind(this)
+      this.clearTarget.addEventListener('click', this.onClearClick)
+    }
   }
 
   disconnect() {
@@ -32,6 +37,10 @@ export default class extends Controller {
     this.inputTarget.removeEventListener('input', this.onInputChange)
     this.resultsTarget.removeEventListener('mousedown', this.onResultsMouseDown)
     this.resultsTarget.removeEventListener('click', this.onResultsClick)
+
+    if (this.hasClearTarget) {
+      this.clearTarget.removeEventListener('click', this.onClearClick)
+    }
   }
 
   sibling(next) {
@@ -133,6 +142,17 @@ export default class extends Controller {
     if (!(event.target instanceof Element)) return
     const selected = event.target.closest('[role="option"]')
     if (selected) this.commit(selected)
+  }
+
+  onClearClick(event) {
+    event.preventDefault()
+    if ( this.hasHiddenTarget ) {
+      this.hiddenTarget.value = ''
+    }
+
+    this.inputTarget.value = ''
+
+    this.inputTarget.focus()
   }
 
   onResultsMouseDown() {
