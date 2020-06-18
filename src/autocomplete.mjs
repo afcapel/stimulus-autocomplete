@@ -195,6 +195,7 @@ export default class extends Controller {
 
     if (!this.src) return
 
+    const headers = { 'X-Requested-With': 'XMLHttpRequest' }
     const url = new URL(this.src, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
     params.append("q", query)
@@ -202,7 +203,7 @@ export default class extends Controller {
 
     this.element.dispatchEvent(new CustomEvent("loadstart"))
 
-    fetch(url.toString())
+    fetch(url.toString(), { headers })
       .then(response => response.text())
       .then(html => {
         this.resultsTarget.innerHTML = html
