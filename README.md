@@ -33,7 +33,7 @@ To use the autocomplete, you need some markup as this:
 <div data-controller="autocomplete" data-autocomplete-url="/birds/search">
   <input type="text" data-target="autocomplete.input"/>
   <input type="hidden" name="bird_id" data-target="autocomplete.hidden"/>
-  <ul data-target="autocomplete.results"></ul>
+  <ul class="list-group" data-target="autocomplete.results"></ul>
 </div>
 ```
 
@@ -41,10 +41,11 @@ The component makes a request to the `data-autocomplete-url` to fetch results fo
 the contents of the input field. The server must answer with an html fragment:
 
 ```html
-<li role="option" data-autocomplete-value="1">Blackbird</li>
-<li role="option" data-autocomplete-value="2">Bluebird</li>
-<li role="option" data-autocomplete-value="3">Mockingbird</li>
+<li class="list-group-item" role="option" data-autocomplete-value="1">Blackbird</li>
+<li class="list-group-item" role="option" data-autocomplete-value="2">Bluebird</li>
+<li class="list-group-item" role="option" data-autocomplete-value="3">Mockingbird</li>
 ```
+Note: class `list-group` on `<ul>` and `list-group-item` on <li> is required to apply the same css as displayed in the gif above.
 
 If the controller has a `hidden` target, that field will be updated with the value
 of the selected option. Otherwise, the search text field will be updated.
