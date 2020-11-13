@@ -26,12 +26,19 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.inputTarget.removeEventListener('keydown', this.onKeydown)
-    this.inputTarget.removeEventListener('focus', this.onInputFocus)
-    this.inputTarget.removeEventListener('blur', this.onInputBlur)
-    this.inputTarget.removeEventListener('input', this.onInputChange)
-    this.resultsTarget.removeEventListener('mousedown', this.onResultsMouseDown)
-    this.resultsTarget.removeEventListener('click', this.onResultsClick)
+    if (this.hasInputTarget) {
+      this.inputTarget.removeEventListener('keydown', this.onKeydown)
+      this.inputTarget.removeEventListener('focus', this.onInputFocus)
+      this.inputTarget.removeEventListener('blur', this.onInputBlur)
+      this.inputTarget.removeEventListener('input', this.onInputChange)
+    }
+    if (this.hasResultsTarget) {
+      this.resultsTarget.removeEventListener(
+        'mousedown',
+        this.onResultsMouseDown
+      )
+      this.resultsTarget.removeEventListener('click', this.onResultsClick)
+    }
   }
 
   sibling(next) {
