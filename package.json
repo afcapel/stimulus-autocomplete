@@ -22,11 +22,13 @@
   },
   "homepage": "https://github.com/afcapel/stimulus-autocomplete",
   "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "stimulus": "^1.1.0"
+    "lodash.debounce": "^4.0.8"
   },
   "devDependencies": {
     "microbundle": "^0.8.4"
+  },
+  "peerDependencies": {
+    "stimulus": ">=1.1.0 <3"
   },
   "scripts": {
     "build": "microbundle",
