@@ -31,9 +31,9 @@ To use the autocomplete, you need some markup as this:
 
 ```html
 <div data-controller="autocomplete" data-autocomplete-url="/birds/search">
-  <input type="text" data-target="autocomplete.input"/>
-  <input type="hidden" name="bird_id" data-target="autocomplete.hidden"/>
-  <ul class="list-group" data-target="autocomplete.results"></ul>
+  <input type="text" data-autocomplete-target="input"/>
+  <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
+  <ul class="list-group" data-autocomplete-target="results"></ul>
 </div>
 ```
 
