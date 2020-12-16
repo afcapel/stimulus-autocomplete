@@ -14,7 +14,7 @@ list of results fetched from the server.
 Load your stimulus application as usual and the register the autocomplete
 controller with it:
 
-```
+```javascript 
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import { Autocomplete } from 'stimulus-autocomplete'
