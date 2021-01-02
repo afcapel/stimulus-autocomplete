@@ -47,6 +47,12 @@ the contents of the input field. The server must answer with an html fragment:
 ```
 Note: class `list-group` on `<ul>` and `list-group-item` on <li> is required to apply the same css as displayed in the gif above.
 
+Items can be included that are not selectable, such as help text or delimiters using `aria-disabled` attribute:
+
+```html
+<li role="option" aria-disabled="true">Start typing to search...</li>
+```
+
 If the controller has a `hidden` target, that field will be updated with the value
 of the selected option. Otherwise, the search text field will be updated.
 
