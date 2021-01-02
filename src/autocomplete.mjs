@@ -135,6 +135,8 @@ export default class extends Controller {
 
     if (this.hasHiddenTarget) {
       this.hiddenTarget.value = value
+      this.hiddenTarget.dispatchEvent(new Event("input"))
+      this.hiddenTarget.dispatchEvent(new Event("change"))
     } else {
       this.inputTarget.value = value
     }
