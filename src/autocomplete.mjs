@@ -23,6 +23,10 @@ export default class extends Controller {
     this.inputTarget.addEventListener("input", this.onInputChange)
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
     this.resultsTarget.addEventListener("click", this.onResultsClick)
+
+    if (typeof this.inputTarget.getAttribute("autofocus") === "string") {
+      this.inputTarget.focus()
+    }
   }
 
   disconnect() {
