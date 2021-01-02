@@ -61,6 +61,8 @@ of the selected option. Otherwise, the search text field will be updated.
 
 ## Events
 
+Events on the main element that registered the controller:
+
 * `autocomplete.change` fires when the users selects a new value from the autocomplete
 field. The event `detail` contains the `value` and `textValue` properties of the
 selected result.
@@ -69,6 +71,10 @@ selected result.
 * `error` fires when there's an error fetching the results.
 * `loadend` fires when the request for results ends, successfully or not.
 * `toggle` fires when the results element is shown or hidden.
+
+Events on the optional hidden input:
+
+* `input` and `change` dispatched to it when the users selects a new value from the autocomplete. This allows you to bind subsequent behavior directly to the `<input type=hidden>` element.
 
 ## Optional parameters
 
