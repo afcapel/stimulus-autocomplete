@@ -7,14 +7,16 @@ list of results fetched from the server.
 
 ## Installation
 
-`yarn add stimulus-autocomplete`
+```plain
+yarn add stimulus-autocomplete
+```
 
 ## Usage
 
 Load your stimulus application as usual and the register the autocomplete
 controller with it:
 
-```javascript 
+```javascript
 import { Application } from 'stimulus'
 import { definitionsFromContext } from 'stimulus/webpack-helpers'
 import { Autocomplete } from 'stimulus-autocomplete'
@@ -45,6 +47,7 @@ the contents of the input field. The server must answer with an html fragment:
 <li class="list-group-item" role="option" data-autocomplete-value="2">Bluebird</li>
 <li class="list-group-item" role="option" data-autocomplete-value="3">Mockingbird</li>
 ```
+
 Note: class `list-group` on `<ul>` and `list-group-item` on <li> is required to apply the same css as displayed in the gif above.
 
 Items can be included that are not selectable, such as help text or delimiters using `aria-disabled` attribute:
@@ -75,10 +78,10 @@ selected result.
 
 There's a minimal example in the `examples` directory. To run it:
 
-```
-$ cd examples
-$ yarn install
-$ yarn run start
+```plain
+cd examples
+yarn install
+yarn run start
 ```
 
 ## Credits
