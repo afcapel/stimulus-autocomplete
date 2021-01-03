@@ -48,7 +48,7 @@ the contents of the input field. The server must answer with an html fragment:
 <li class="list-group-item" role="option" data-autocomplete-value="3">Mockingbird</li>
 ```
 
-Note: class `list-group` on `<ul>` and `list-group-item` on <li> is required to apply the same css as displayed in the gif above.
+Note: class `list-group` on `<ul>` and `list-group-item` on `<li>` is required to apply the same css as displayed in the gif above.
 
 Items can be included that are not selectable, such as help text or delimiters using `aria-disabled` attribute:
 
