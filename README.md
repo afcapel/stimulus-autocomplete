@@ -84,15 +84,10 @@ Events on the optional hidden input:
 
 * If the `<input>` target has an `autofocus` attribute then the input will be given focus immediately so the user can start typing. This is useful if the `<input>` is dynamically added/morphed into the DOM (say by a "edit" button) and the user expects to start typing immediately.
 
-## Examples
+## Example
 
-There's a minimal example in the `examples` directory. To run it:
-
-```plain
-cd examples
-yarn install
-yarn run start
-```
+[This repo](https://github.com/afcapel/stimulus-autocomplete-example) contains a minimal example of how
+to use the library.
 
 ## Credits
 
