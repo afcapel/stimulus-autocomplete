@@ -76,6 +76,7 @@ export default class extends Controller {
     target.setAttribute("aria-selected", "true")
     target.classList.add("active")
     this.inputTarget.setAttribute("aria-activedescendant", target.id)
+    target.scrollIntoView(false)
   }
 
   onKeydown(event) {
