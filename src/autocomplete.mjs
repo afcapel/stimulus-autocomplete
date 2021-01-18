@@ -1,6 +1,18 @@
 import { Controller } from "stimulus"
 import debounce from "lodash.debounce"
 
+const extractTextValue = el => {
+  if (el.hasAttribute("aria-labeledby")) {
+    return el.getAttribute("aria-labeledby").split(" ")
+      .map(id => document.getElementById(id))
+      .filter(el => el !== null)
+      .map(el => el.textContent.trim())
+      .join(" ")
+  } else {
+    return el.textContent.trim()
+  }
+}
+
 export default class extends Controller {
   static targets = ["input", "hidden", "results"]
   static values = {
@@ -136,7 +148,7 @@ export default class extends Controller {
       return
     }
 
-    const textValue = selected.textContent.trim()
+    const textValue = extractTextValue(selected)
     const value = selected.getAttribute("data-autocomplete-value") || textValue
     this.inputTarget.value = textValue
 
