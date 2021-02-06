@@ -79,6 +79,7 @@ Events on the optional hidden input:
 ## Optional parameters
 
 * `min-length` set the minimum number of charaters required to make an autocomplete request.
+* `submit-on-enter` submit the form after the autocomplete selection via enter keypress.
 
 ## Optional HTML configuration
 
