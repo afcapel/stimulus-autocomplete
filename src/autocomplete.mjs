@@ -108,7 +108,9 @@ export default class extends Controller {
           )
           if (selected && !this.resultsTarget.hidden) {
             this.commit(selected)
-            event.preventDefault()
+            if (!this.data.get("submit-on-enter")){
+              event.preventDefault()
+            }
           }
         }
         break
