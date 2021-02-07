@@ -47,7 +47,7 @@ export default class extends Controller {
 
   sibling(next) {
     const options = Array.from(
-      this.resultsTarget.querySelectorAll('[role="option"]')
+      this.resultsTarget.querySelectorAll('[role="option"]:not([aria-disabled])')
     )
     const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
     const index = options.indexOf(selected)
