@@ -3,6 +3,11 @@ import debounce from "lodash.debounce"
 
 export default class extends Controller {
   static targets = ["input", "hidden", "results"]
+  static values = {
+    submitOnEnter: Boolean,
+    url: String,
+    minLength: Number
+  }
 
   connect() {
     this.resultsTarget.hidden = true
@@ -108,7 +113,7 @@ export default class extends Controller {
           )
           if (selected && !this.resultsTarget.hidden) {
             this.commit(selected)
-            if (!this.data.get("submit-on-enter")){
+            if (!this.submitOnEnterValue){
               event.preventDefault()
             }
           }
@@ -245,14 +250,10 @@ export default class extends Controller {
   }
 
   get src() {
-    return this.data.get("url")
+    return this.urlValue
   }
 
   get minLength() {
-    const minLength = this.data.get("min-length")
-    if (!minLength) {
-      return 0
-    }
-    return parseInt(minLength, 10)
+    return this.minLengthValue
   }
 }
