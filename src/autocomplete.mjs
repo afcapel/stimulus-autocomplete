@@ -113,7 +113,7 @@ export default class extends Controller {
           )
           if (selected && !this.resultsTarget.hidden) {
             this.commit(selected)
-            if (!this.submitOnEnterValue){
+            if (!this.hasSubmitOnEnterValue){
               event.preventDefault()
             }
           }
@@ -195,15 +195,15 @@ export default class extends Controller {
 
   fetchResults() {
     const query = this.inputTarget.value.trim()
-    if (!query || query.length < this.minLength) {
+    if (!query || query.length < this.minLengthValue) {
       this.hideAndRemoveOptions()
       return
     }
 
-    if (!this.src) return
+    if (!this.hasUrlValue) return
 
     const headers = { 'X-Requested-With': 'XMLHttpRequest' }
-    const url = new URL(this.src, window.location.href)
+    const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
     params.append("q", query)
     url.search = params.toString()
@@ -247,13 +247,5 @@ export default class extends Controller {
         detail: { input: this.input, results: this.results }
       })
     )
-  }
-
-  get src() {
-    return this.urlValue
-  }
-
-  get minLength() {
-    return this.minLengthValue
   }
 }
