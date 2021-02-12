@@ -59,6 +59,12 @@ Items can be included that are not selectable, such as help text or delimiters u
 If the controller has a `hidden` target, that field will be updated with the value
 of the selected option. Otherwise, the search text field will be updated.
 
+The height of the result list can be limited with CSS, e.g.:
+
+```html
+<ul class="list-group" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
+```
+
 ## Events
 
 Events on the main element that registered the controller:
