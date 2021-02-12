@@ -80,11 +80,11 @@ Events on the optional hidden input:
 
 * `min-length` set the minimum number of charaters required to make an autocomplete request.
 * `submit-on-enter` submit the form after the autocomplete selection via enter keypress.
-* `aria-labeledby` can be used to define which elements' `textContent` will be used as the input label upon selection. That way your option elements can have more elaborate content, i.e.:
+* `data-autocomplete-label` can be used to define the input label upon selection. That way your option elements can have more elaborate markup, i.e.:
 
   ```html
-  <li class="list-group-item" role="option" data-autocomplete-value="1" aria-labeledby="bird-1">
-    <p id="bird-1">Blackbird</p>
+  <li class="list-group-item" role="option" data-autocomplete-value="1" data-autocomplete-label="Blackbird">
+    <p>Blackbird</p>
     <p class="text-muted"><small>That's also the name of an airplane</small></p>
   </li>
   ```
