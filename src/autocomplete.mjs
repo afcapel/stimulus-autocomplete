@@ -57,7 +57,9 @@ export default class extends Controller {
 
   sibling(next) {
     const options = Array.from(
-      this.resultsTarget.querySelectorAll('[role="option"]:not([aria-disabled])')
+      this.resultsTarget.querySelectorAll(
+        '[role="option"]:not([aria-disabled])'
+      )
     )
     const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
     const index = options.indexOf(selected)
@@ -119,7 +121,7 @@ export default class extends Controller {
           )
           if (selected && !this.resultsTarget.hidden) {
             this.commit(selected)
-            if (!this.hasSubmitOnEnterValue){
+            if (!this.hasSubmitOnEnterValue) {
               event.preventDefault()
             }
           }
@@ -208,7 +210,7 @@ export default class extends Controller {
 
     if (!this.hasUrlValue) return
 
-    const headers = { 'X-Requested-With': 'XMLHttpRequest' }
+    const headers = { "X-Requested-With": "XMLHttpRequest" }
     const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
     params.append("q", query)
