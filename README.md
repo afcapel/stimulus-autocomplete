@@ -101,8 +101,11 @@ Events on the optional hidden input:
 
 ## Example
 
-[This repo](https://github.com/afcapel/stimulus-autocomplete-example) contains a minimal example of how
+- [This repo](https://github.com/afcapel/stimulus-autocomplete-example) contains a minimal example of how
 to use the library.
+- [Autocomplete with StimulusJS - Drifting Ruby](https://www.driftingruby.com/episodes/autocomplete-with-stimulusjs)
+- [Search Autocomplete Stimulus](https://itnext.io/search-autocomplete-stimulus-4e941df54d39?sk=a09dbf0e1ca8cd2f544ba34b78f739f0)
+
 
 ## Credits
 
