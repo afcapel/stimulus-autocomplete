@@ -4,9 +4,10 @@ import debounce from "lodash.debounce"
 export default class extends Controller {
   static targets = ["input", "hidden", "results"]
   static values = {
-    submitOnEnter: Boolean,
     url: String,
-    minLength: Number
+    minLength: Number,
+    submitOnEnter: Boolean,
+    scrollIntoViewAlignToTop: Boolean
   }
 
   connect() {
@@ -73,7 +74,9 @@ export default class extends Controller {
     target.setAttribute("aria-selected", "true")
     target.classList.add("active")
     this.inputTarget.setAttribute("aria-activedescendant", target.id)
-    target.scrollIntoView(false)
+    if (this.hasScrollIntoViewAlignToTopValue) {
+      target.scrollIntoView(this.scrollIntoViewAlignToTopValue)
+    }
   }
 
   onKeydown(event) {
