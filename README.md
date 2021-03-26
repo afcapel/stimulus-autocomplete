@@ -84,8 +84,9 @@ Events on the optional hidden input:
 
 ## Optional parameters
 
-* `min-length` set the minimum number of charaters required to make an autocomplete request.
+* `min-length` set the minimum number of characters required to make an autocomplete request.
 * `submit-on-enter` submit the form after the autocomplete selection via enter keypress.
+* `skip-hidden-property` skip setting the `hidden` property on the element so that you can manually hide and show the element (by listening to the `toggle` event).
 * `data-autocomplete-label` can be used to define the input label upon selection. That way your option elements can have more elaborate markup, i.e.:
 
   ```html

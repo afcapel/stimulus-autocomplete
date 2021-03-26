@@ -6,7 +6,14 @@ export default class extends Controller {
   static values = {
     submitOnEnter: Boolean,
     url: String,
-    minLength: Number
+    minLength: Number,
+    /*
+     * Should we skip adding/removing the "hidden" property from resultsTarget?
+     *
+     * If set, you must listen to the "toggle" event from this
+     * controller to manually show/hide the results target.
+     */
+    skipHiddenProperty: Boolean,
   }
 
   connect() {
@@ -235,7 +242,9 @@ export default class extends Controller {
 
   open() {
     if (!this.isHidden) return
-    this.resultsTarget.hidden = false
+    if (!this.hasSkipHiddenPropertyValue) {
+      this.resultsTarget.hidden = false
+    }
     this.isHidden = false;
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
@@ -247,7 +256,9 @@ export default class extends Controller {
 
   close() {
     if (this.isHidden) return
-    this.resultsTarget.hidden = true
+    if (!this.hasSkipHiddenPropertyValue) {
+      this.resultsTarget.hidden = true
+    }
     this.isHidden = true;
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
