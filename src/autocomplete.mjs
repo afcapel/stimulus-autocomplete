@@ -79,7 +79,7 @@ export default class extends Controller {
   onKeydown(event) {
     switch (event.key) {
       case "Escape":
-        if (!this.resultsTarget.hidden) {
+        if (!this.isHidden) {
           this.hideAndRemoveOptions()
           event.stopPropagation()
           event.preventDefault()
@@ -114,7 +114,7 @@ export default class extends Controller {
           const selected = this.resultsTarget.querySelector(
             '[aria-selected="true"]'
           )
-          if (selected && !this.resultsTarget.hidden) {
+          if (selected && !this.isHidden) {
             this.commit(selected)
             if (!this.hasSubmitOnEnterValue) {
               event.preventDefault()
@@ -234,8 +234,9 @@ export default class extends Controller {
   }
 
   open() {
-    if (!this.resultsTarget.hidden) return
+    if (!this.isHidden) return
     this.resultsTarget.hidden = false
+    this.isHidden = false;
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
@@ -245,8 +246,9 @@ export default class extends Controller {
   }
 
   close() {
-    if (this.resultsTarget.hidden) return
+    if (this.isHidden) return
     this.resultsTarget.hidden = true
+    this.isHidden = true;
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
