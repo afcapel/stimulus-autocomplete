@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   connect() {
-    this.resultsTarget.hidden = true
+    this.close();
 
     this.inputTarget.setAttribute("autocomplete", "off")
     this.inputTarget.setAttribute("spellcheck", "false")
@@ -127,7 +127,7 @@ export default class extends Controller {
 
   onInputBlur() {
     if (this.mouseDown) return
-    this.resultsTarget.hidden = true
+    this.close();
   }
 
   commit(selected) {
@@ -135,7 +135,7 @@ export default class extends Controller {
 
     if (selected instanceof HTMLAnchorElement) {
       selected.click()
-      this.resultsTarget.hidden = true
+      this.close();
       return
     }
 
@@ -192,7 +192,7 @@ export default class extends Controller {
   }
 
   hideAndRemoveOptions() {
-    this.resultsTarget.hidden = true
+    this.close();
     this.resultsTarget.innerHTML = null
   }
 
@@ -219,7 +219,11 @@ export default class extends Controller {
         this.resultsTarget.innerHTML = html
         this.identifyOptions()
         const hasResults = !!this.resultsTarget.querySelector('[role="option"]')
-        this.resultsTarget.hidden = !hasResults
+        if (hasResults) {
+          this.open();
+        } else {
+          this.close();
+        }
         this.element.dispatchEvent(new CustomEvent("load"))
         this.element.dispatchEvent(new CustomEvent("loadend"))
       })
@@ -235,7 +239,7 @@ export default class extends Controller {
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { input: this.input, results: this.results }
+        detail: { action: 'open', input: this.input, results: this.results }
       })
     )
   }
@@ -247,7 +251,7 @@ export default class extends Controller {
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { input: this.input, results: this.results }
+        detail: { action: 'close', input: this.input, results: this.results }
       })
     )
   }
