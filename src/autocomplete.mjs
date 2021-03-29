@@ -249,7 +249,7 @@ export default class extends Controller {
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { action: 'open', input: this.input, results: this.results }
+        detail: { action: 'open', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
   }
@@ -264,7 +264,7 @@ export default class extends Controller {
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { action: 'close', input: this.input, results: this.results }
+        detail: { action: 'close', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
   }
