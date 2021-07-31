@@ -251,6 +251,19 @@ export default class extends Controller {
       })
     )
   }
+  
+  clear(event) {
+    event.preventDefault();
+    event.stopImmediatePropagation();
+
+    if ( this.hasHiddenTarget ) {
+      this.hiddenTarget.value = ''
+    }
+
+    this.inputTarget.value = ''
+
+    this.inputTarget.focus();
+  }
 
   extractTextValue = el =>
     el.hasAttribute("data-autocomplete-label")
