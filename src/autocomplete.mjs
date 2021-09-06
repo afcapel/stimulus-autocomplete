@@ -6,11 +6,18 @@ export default class extends Controller {
   static values = {
     submitOnEnter: Boolean,
     url: String,
-    minLength: Number
+    minLength: Number,
+    /*
+     * Should we skip adding/removing the "hidden" property from resultsTarget?
+     *
+     * If set, you must listen to the "toggle" event from this
+     * controller to manually show/hide the results target.
+     */
+    skipHiddenProperty: Boolean,
   }
 
   connect() {
-    this.resultsTarget.hidden = true
+    this.close();
 
     this.inputTarget.setAttribute("autocomplete", "off")
     this.inputTarget.setAttribute("spellcheck", "false")
@@ -79,7 +86,7 @@ export default class extends Controller {
   onKeydown(event) {
     switch (event.key) {
       case "Escape":
-        if (!this.resultsTarget.hidden) {
+        if (!this.isHidden) {
           this.hideAndRemoveOptions()
           event.stopPropagation()
           event.preventDefault()
@@ -114,7 +121,7 @@ export default class extends Controller {
           const selected = this.resultsTarget.querySelector(
             '[aria-selected="true"]'
           )
-          if (selected && !this.resultsTarget.hidden) {
+          if (selected && !this.isHidden) {
             this.commit(selected)
             if (!this.hasSubmitOnEnterValue) {
               event.preventDefault()
@@ -127,7 +134,7 @@ export default class extends Controller {
 
   onInputBlur() {
     if (this.mouseDown) return
-    this.resultsTarget.hidden = true
+    this.close();
   }
 
   commit(selected) {
@@ -135,7 +142,7 @@ export default class extends Controller {
 
     if (selected instanceof HTMLAnchorElement) {
       selected.click()
-      this.resultsTarget.hidden = true
+      this.close();
       return
     }
 
@@ -192,7 +199,7 @@ export default class extends Controller {
   }
 
   hideAndRemoveOptions() {
-    this.resultsTarget.hidden = true
+    this.close();
     this.resultsTarget.innerHTML = null
   }
 
@@ -219,7 +226,11 @@ export default class extends Controller {
         this.resultsTarget.innerHTML = html
         this.identifyOptions()
         const hasResults = !!this.resultsTarget.querySelector('[role="option"]')
-        this.resultsTarget.hidden = !hasResults
+        if (hasResults) {
+          this.open();
+        } else {
+          this.close();
+        }
         this.element.dispatchEvent(new CustomEvent("load"))
         this.element.dispatchEvent(new CustomEvent("loadend"))
       })
@@ -230,24 +241,30 @@ export default class extends Controller {
   }
 
   open() {
-    if (!this.resultsTarget.hidden) return
-    this.resultsTarget.hidden = false
+    if (!this.isHidden) return
+    if (!this.hasSkipHiddenPropertyValue) {
+      this.resultsTarget.hidden = false
+    }
+    this.isHidden = false;
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { input: this.input, results: this.results }
+        detail: { action: 'open', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
   }
 
   close() {
-    if (this.resultsTarget.hidden) return
-    this.resultsTarget.hidden = true
+    if (this.isHidden) return
+    if (!this.hasSkipHiddenPropertyValue) {
+      this.resultsTarget.hidden = true
+    }
+    this.isHidden = true;
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { input: this.input, results: this.results }
+        detail: { action: 'close', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
   }
