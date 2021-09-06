@@ -179,6 +179,7 @@ export default class extends Controller {
 
   onInputChange() {
     this.element.removeAttribute("value")
+    if (this.hasHiddenTarget) this.hiddenTarget.value = ''
     this.fetchResults()
   }
 
