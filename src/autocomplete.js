@@ -188,6 +188,7 @@ export default class Autocomplete extends Controller {
 
   onInputChange() {
     this.element.removeAttribute("value")
+    if (this.hasHiddenTarget) this.hiddenTarget.value = ''
     this.fetchResults()
   }
 
