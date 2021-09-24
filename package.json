@@ -28,10 +28,10 @@
     "microbundle": "^0.8.4"
   },
   "peerDependencies": {
-    "stimulus": ">=2.0.0 <3"
+    "@hotwired/stimulus": "^3.0.0"
   },
   "scripts": {
-    "build": "microbundle",
-    "dev": "microbundle watch"
+    "build": "microbundle --globals @hotwired/stimulus=stimulus",
+    "dev": "microbundle watch --globals @hotwired/stimulus=stimulus"
   }
 }
