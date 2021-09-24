@@ -3,6 +3,7 @@ import debounce from "lodash.debounce"
 
 export default class extends Controller {
   static targets = ["input", "hidden", "results"]
+  static classes = ["selected"]
   static values = {
     submitOnEnter: Boolean,
     url: String,
@@ -75,10 +76,10 @@ export default class extends Controller {
       '[aria-selected="true"]'
     )) {
       el.removeAttribute("aria-selected")
-      el.classList.remove("active")
+      el.classList.remove(...this.selectedClasses)
     }
     target.setAttribute("aria-selected", "true")
-    target.classList.add("active")
+    target.classList.add(...this.selectedClasses)
     this.inputTarget.setAttribute("aria-activedescendant", target.id)
     target.scrollIntoView(false)
   }
