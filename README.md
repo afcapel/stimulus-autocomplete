@@ -60,6 +60,8 @@ The height of the result list can be limited with CSS, e.g.:
 <ul class="list-group" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
 ```
 
+You may also add your own class(es) to the selected item with `data-autcomplete-selected-class="active"` to visualize the current selected item when navigating with up and down keys.
+
 ## Events
 
 Events on the main element that registered the controller:
