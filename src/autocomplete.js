@@ -1,7 +1,7 @@
 import { Controller } from "stimulus"
 import debounce from "lodash.debounce"
 
-export default class extends Controller {
+export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static values = {
     submitOnEnter: Boolean,
@@ -274,3 +274,5 @@ export default class extends Controller {
       ? el.getAttribute("data-autocomplete-label")
       : el.textContent.trim()
 }
+
+export { Autocomplete }

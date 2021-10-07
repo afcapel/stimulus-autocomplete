@@ -3,8 +3,8 @@
   "version": "2.0.0",
   "description": "StimulusJS autocomplete component",
   "main": "dist/stimulus-autocomplete.js",
-  "source": "src/index.mjs",
-  "author": "Alberto Fernández-Capel <afcapel@gmail.com>",
+  "source": "src/autocomplete.js",
+  "author": "Alberto Fernández-Capel <alberto@hey.com>",
   "license": "MIT",
   "private": false,
   "keywords": [
