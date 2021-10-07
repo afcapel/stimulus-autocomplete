@@ -1,5 +1,4 @@
 import { Controller } from "stimulus"
-import debounce from "lodash.debounce"
 
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
@@ -274,5 +273,15 @@ export default class Autocomplete extends Controller {
       ? el.getAttribute("data-autocomplete-label")
       : el.textContent.trim()
 }
+
+const debounce = (fn, delay = 10) => {
+  let timeoutId = null
+
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(fn, delay)
+  }
+}
+
 
 export { Autocomplete }

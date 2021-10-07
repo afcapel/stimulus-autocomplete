@@ -21,9 +21,7 @@
     "url": "https://github.com/afcapel/stimulus-autocomplete/issues"
   },
   "homepage": "https://github.com/afcapel/stimulus-autocomplete",
-  "dependencies": {
-    "lodash.debounce": "^4.0.8"
-  },
+  "dependencies": {},
   "devDependencies": {
     "microbundle": "^0.8.4"
   },
