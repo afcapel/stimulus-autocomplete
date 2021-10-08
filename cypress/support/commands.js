@@ -3,6 +3,11 @@ const hidden = "input[name=bird_id]"
 const optionSelector = "li[role=option]"
 const secondOption = "li[data-autocomplete-value='2']"
 
+Cypress.Commands.add("loadPage", () => {
+  cy.visit("/")
+  cy.get("[data-autocomplete-ready-value]").should("be.visible")
+})
+
 Cypress.Commands.add("enterTerm", (term) => {
   cy.get(input).type(term)
 })

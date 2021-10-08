@@ -1,7 +1,6 @@
 describe("Stimulus autocomplete", () => {
   beforeEach(() =>{
-    cy.visit("/")
-    cy.wait(500)
+    cy.loadPage()
   })
 
   it("shows results", () => {
