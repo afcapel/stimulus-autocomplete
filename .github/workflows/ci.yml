@@ -10,4 +10,4 @@ jobs:
       - name: Custom tests 🧪
         uses: cypress-io/github-action@v2
         with:
-          command: yarn run test
+          command: yarn run test:multibrowser
