@@ -1,5 +1,3 @@
-
-
 describe("Stimulus autocomplete", () => {
   beforeEach(() =>{
     cy.visit("/")
