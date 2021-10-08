@@ -1,5 +1,3 @@
-/node_modules
-dist
-yarn-error.log
 .DS_Store
-examples/node_modules
+/node_modules
+yarn-error.log
