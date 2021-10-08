@@ -3,6 +3,7 @@ import { Controller } from "stimulus"
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static values = {
+    ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
     minLength: Number,
@@ -38,6 +39,8 @@ export default class Autocomplete extends Controller {
     if (typeof this.inputTarget.getAttribute("autofocus") === "string") {
       this.inputTarget.focus()
     }
+
+    this.readyValue = true
   }
 
   disconnect() {

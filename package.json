@@ -36,6 +36,8 @@
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
     "cy:run": "cypress run",
-    "test": "start-server-and-test start http://localhost:3030 cy:run"
+    "cy:all": "yarn run cy:run:chrome && yarn run cy:run:firefox",
+    "test": "start-server-and-test start http://localhost:3030 cy:run",
+    "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all"
   }
 }
