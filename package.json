@@ -24,5 +24,18 @@
   "homepage": "https://github.com/afcapel/stimulus-autocomplete",
   "peerDependencies": {
     "stimulus": ">=2.0.0 <3"
+  },
+  "devDependencies": {
+    "cypress": "^8.5.0",
+    "http-server": "^13.0.2",
+    "start-server-and-test": "^1.14.0",
+    "stimulus": "2.0.0"
+  },
+  "scripts": {
+    "start": "http-server ./example -p 3030",
+    "cy:run:chrome": "cypress run --browser chrome",
+    "cy:run:firefox": "cypress run --browser firefox",
+    "cy:run": "cypress run",
+    "test": "start-server-and-test start http://localhost:3030 cy:run"
   }
 }
