@@ -27,7 +27,7 @@ application.register('autocomplete', Autocomplete)
 To use the autocomplete, you need some markup as this:
 
 ```html
-<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search" data-autocomplete-selected-class="active">
+<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search">
   <input type="text" data-autocomplete-target="input"/>
   <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
   <ul class="list-group" data-autocomplete-target="results"></ul>
@@ -59,8 +59,6 @@ The height of the result list can be limited with CSS, e.g.:
 ```html
 <ul class="list-group" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
 ```
-
-Stimulus Autocomplete adds a default `.active` class to the currently selected result. You can use another class instead of `.active` with the `data-autcomplete-selected-class` attribute.
 
 ## Events
 
@@ -98,6 +96,7 @@ Events on the optional hidden input:
 * `min-length` set the minimum number of characters required to make an autocomplete request.
 * `submit-on-enter` submit the form after the autocomplete selection via enter keypress.
 * `skip-hidden-property` skip setting the `hidden` property on the element so that you can manually hide and show the element (by listening to the `toggle` event).
+* `data-autcomplete-selected-class` Stimulus Autocomplete adds a default `.active` class to the currently selected result. You can use another class instead of `.active` with the this attribute.
 * `data-autocomplete-label` can be used to define the input label upon selection. That way your option elements can have more elaborate markup, i.e.:
 
   ```html
@@ -113,8 +112,8 @@ Events on the optional hidden input:
 
 ## Examples
 
-- [This repo](https://github.com/afcapel/stimulus-autocomplete-example) contains a minimal example of how
-to use the library.
+- [The example directory](https://github.com/afcapel/stimulus-autocomplete/tree/main/example) contains a minimal example of how to use the library as a ES module.
+- [This example Rails 7 app](https://github.com/afcapel/stimulus-autocomplete-rails-example) shows how to use it with  Webpack.
 - [Autocomplete with StimulusJS - Drifting Ruby](https://www.driftingruby.com/episodes/autocomplete-with-stimulusjs)
 - [Search Autocomplete Stimulus](https://itnext.io/search-autocomplete-stimulus-4e941df54d39?sk=a09dbf0e1ca8cd2f544ba34b78f739f0)
 
@@ -134,9 +133,7 @@ To release a new version follow these steps:
 1. Update the version number in `package.json`. Try to follow
 semantic versioning guidelines as much as possible.
 
-2. Build the package with `npm run build`
-
-3. Publish the package to npmjs.com with `npm publish`
+2. Publish the package to npmjs.com with `npm publish`
 
 ## License
 
