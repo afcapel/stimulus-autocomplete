@@ -171,6 +171,11 @@ export default class Autocomplete extends Controller {
     )
   }
 
+  clear() {
+    this.inputTarget.value = ""
+    if (this.hasHiddenTarget) this.hiddenTarget.value = ""
+  }
+
   onResultsClick(event) {
     if (!(event.target instanceof Element)) return
     const selected = event.target.closest('[role="option"]')
