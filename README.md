@@ -17,22 +17,17 @@ Load your stimulus application as usual and the register the autocomplete
 controller with it:
 
 ```javascript
-import { Application } from 'stimulus'
-import { definitionsFromContext } from 'stimulus/webpack-helpers'
+import { Application } from '@hotwired/stimulus'
 import { Autocomplete } from 'stimulus-autocomplete'
 
 const application = Application.start()
-
-const context = require.context('controllers', true, /.js$/)
-application.load(definitionsFromContext(context))
-
 application.register('autocomplete', Autocomplete)
 ```
 
 To use the autocomplete, you need some markup as this:
 
 ```html
-<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search">
+<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search" data-autocomplete-selected-class="active">
   <input type="text" data-autocomplete-target="input"/>
   <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
   <ul class="list-group" data-autocomplete-target="results"></ul>
@@ -64,6 +59,8 @@ The height of the result list can be limited with CSS, e.g.:
 ```html
 <ul class="list-group" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
 ```
+
+You may also add your own class(es) to the selected item with `data-autcomplete-selected-class="active"` to visualize the current selected item when navigating with up and down keys.
 
 ## Events
 

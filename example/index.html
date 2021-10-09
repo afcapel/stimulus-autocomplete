@@ -11,13 +11,13 @@
   <script type="importmap-shim">
     {
       "imports": {
-        "stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
+        "@hotwired/stimulus": "https://unpkg.com/@hotwired/stimulus/dist/stimulus.js"
       }
     }
   </script>
 
   <script type="module-shim">
-    import { Application } from 'stimulus'
+    import { Application } from '@hotwired/stimulus'
     import { Autocomplete } from './stimulus-autocomplete.js'
 
     const application = Application.start()

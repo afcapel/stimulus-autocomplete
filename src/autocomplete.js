@@ -1,7 +1,8 @@
-import { Controller } from "stimulus"
+import { Controller } from "@hotwired/stimulus"
 
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
+  static classes = ["selected"]
   static values = {
     ready: Boolean,
     submitOnEnter: Boolean,
@@ -77,10 +78,10 @@ export default class Autocomplete extends Controller {
       '[aria-selected="true"]'
     )) {
       el.removeAttribute("aria-selected")
-      el.classList.remove("active")
+      el.classList.remove(...this.selectedClasses)
     }
     target.setAttribute("aria-selected", "true")
-    target.classList.add("active")
+    target.classList.add(...this.selectedClasses)
     this.inputTarget.setAttribute("aria-activedescendant", target.id)
     target.scrollIntoView(false)
   }
