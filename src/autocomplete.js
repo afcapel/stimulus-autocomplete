@@ -19,8 +19,6 @@ export default class Autocomplete extends Controller {
   connect() {
     this.close()
 
-    // chrome ignores autocomplete=off in favor of series of defined autocomplete values in their WHATWG standard
-    // https://bugs.chromium.org/p/chromium/issues/detail?id=468153#c164
     this.inputTarget.hasAttribute("autocomplete") || this.inputTarget.setAttribute("autocomplete", "off")
     this.inputTarget.setAttribute("spellcheck", "false")
 
