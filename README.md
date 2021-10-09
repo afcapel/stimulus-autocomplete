@@ -60,7 +60,7 @@ The height of the result list can be limited with CSS, e.g.:
 <ul class="list-group" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
 ```
 
-You may also add your own class(es) to the selected item with `data-autcomplete-selected-class="active"` to visualize the current selected item when navigating with up and down keys.
+Stimulus Autocomplete adds a default `.active` class to the currently selected result. You can use another class instead of `.active` with the `data-autcomplete-selected-class` attribute.
 
 ## Events
 
@@ -84,7 +84,7 @@ export default class extends Controller {
     }
 
     autocomplete(event) {
-        console.log(event); 
+        console.log(event);
     }
 }
 ```

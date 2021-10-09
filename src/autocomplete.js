@@ -1,8 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class Autocomplete extends Controller {
-  static targets = ["input", "hidden", "results"]
-  static classes = ["selected"]
+  static targets = [ "input", "hidden", "results" ]
+  static classes = [ "selected" ]
   static values = {
     ready: Boolean,
     submitOnEnter: Boolean,
@@ -276,6 +276,10 @@ export default class Autocomplete extends Controller {
         detail: { action: 'close', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
+  }
+
+  get selectedClasses() {
+    return this.hasSelectedClass ? super.selectedClasses : [ "active" ]
   }
 
   extractTextValue = el =>
