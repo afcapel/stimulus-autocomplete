@@ -17,7 +17,7 @@ export default class Autocomplete extends Controller {
   }
 
   connect() {
-    this.close();
+    this.close()
 
     this.inputTarget.setAttribute("autocomplete", "off")
     this.inputTarget.setAttribute("spellcheck", "false")
@@ -136,7 +136,7 @@ export default class Autocomplete extends Controller {
 
   onInputBlur() {
     if (this.mouseDown) return
-    this.close();
+    this.close()
   }
 
   commit(selected) {
@@ -144,7 +144,7 @@ export default class Autocomplete extends Controller {
 
     if (selected instanceof HTMLAnchorElement) {
       selected.click()
-      this.close();
+      this.close()
       return
     }
 
@@ -201,7 +201,7 @@ export default class Autocomplete extends Controller {
   }
 
   hideAndRemoveOptions() {
-    this.close();
+    this.close()
     this.resultsTarget.innerHTML = null
   }
 
@@ -229,9 +229,9 @@ export default class Autocomplete extends Controller {
         this.identifyOptions()
         const hasResults = !!this.resultsTarget.querySelector('[role="option"]')
         if (hasResults) {
-          this.open();
+          this.open()
         } else {
-          this.close();
+          this.close()
         }
         this.element.dispatchEvent(new CustomEvent("load"))
         this.element.dispatchEvent(new CustomEvent("loadend"))
@@ -247,7 +247,7 @@ export default class Autocomplete extends Controller {
     if (!this.hasSkipHiddenPropertyValue) {
       this.resultsTarget.hidden = false
     }
-    this.isHidden = false;
+    this.isHidden = false
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
@@ -261,7 +261,7 @@ export default class Autocomplete extends Controller {
     if (!this.hasSkipHiddenPropertyValue) {
       this.resultsTarget.hidden = true
     }
-    this.isHidden = true;
+    this.isHidden = true
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
