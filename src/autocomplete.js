@@ -111,9 +111,7 @@ export default class Autocomplete extends Controller {
       case "Tab":
         {
           const selected = this.selectedOption
-          if (selected) {
-            this.commit(selected)
-          }
+          if (selected) this.commit(selected)
         }
         break
       case "Enter":
