@@ -203,15 +203,12 @@ export default class Autocomplete extends Controller {
     this.resultsTarget.innerHTML = null
   }
 
-  headersForFetch() {
-    return { "X-Requested-With": "XMLHttpRequest" }
-  }
-
   fetchResults() {
     const query = this.inputTarget.value.trim()
+
     if (!query || query.length < this.minLengthValue) {
       this.hideAndRemoveOptions()
-      return
+      return null
     }
 
     if (!this.hasUrlValue) return
@@ -222,26 +219,23 @@ export default class Autocomplete extends Controller {
     params.append("q", query)
     url.search = params.toString()
 
-    this.element.dispatchEvent(new CustomEvent("loadstart"))
+    return url.toString()
+  }
 
-    fetch(url.toString(), { headers })
-      .then(response => response.text())
-      .then(html => {
-        this.resultsTarget.innerHTML = html
-        this.identifyOptions()
-        const hasResults = !!this.options
-        if (hasResults) {
-          this.open()
-        } else {
-          this.close()
-        }
-        this.element.dispatchEvent(new CustomEvent("load"))
-        this.element.dispatchEvent(new CustomEvent("loadend"))
-      })
-      .catch(() => {
-        this.element.dispatchEvent(new CustomEvent("error"))
-        this.element.dispatchEvent(new CustomEvent("loadend"))
-      })
+  doFetch = async (url) => {
+    const response = await fetch(url, this.headersForFetch())
+    const html = await response.text()
+    return html
+  }
+
+  replaceResults(html) {
+    this.resultsTarget.innerHTML = html
+    this.identifyOptions()
+    if (!!this.options) {
+      this.open()
+    } else {
+      this.close()
+    }
   }
 
   open() {
@@ -283,6 +277,10 @@ export default class Autocomplete extends Controller {
 
   get selectedClassesOrDefault() {
     return this.hasSelectedClass ? this.selectedClasses : ["active"]
+  }
+
+  headersForFetch() {
+    return { "X-Requested-With": "XMLHttpRequest" } // override if you need
   }
 
   extractTextValue = el =>
