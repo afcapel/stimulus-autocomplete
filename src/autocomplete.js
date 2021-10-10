@@ -34,7 +34,7 @@ export default class Autocomplete extends Controller {
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
     this.resultsTarget.addEventListener("click", this.onResultsClick)
 
-    if (typeof this.inputTarget.getAttribute("autofocus") === "string") {
+    if (this.inputTarget.hasAttribute("autofocus")) {
       this.inputTarget.focus()
     }
 
@@ -48,6 +48,7 @@ export default class Autocomplete extends Controller {
       this.inputTarget.removeEventListener("blur", this.onInputBlur)
       this.inputTarget.removeEventListener("input", this.onInputChange)
     }
+
     if (this.hasResultsTarget) {
       this.resultsTarget.removeEventListener("mousedown", this.onResultsMouseDown)
       this.resultsTarget.removeEventListener("click", this.onResultsClick)
