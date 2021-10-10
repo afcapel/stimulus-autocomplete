@@ -32,7 +32,7 @@ Cypress.Commands.add("assertSecondResultActive", (selectedClass = "active") => {
   cy.get(secondOption).should("have.class", selectedClass)
 })
 
-Cypress.Commands.add("assertSecondResultSelected", () => {
-  cy.get(input).should("have.value", "Bluebird")
-  cy.get(hidden).should("have.value", "2")
+Cypress.Commands.add("assertSecondResultSelected", (textValue = "Bluebird", hiddenValue = 2) => {
+  cy.get(input).should("have.value", textValue)
+  cy.get(hidden).should("have.value", hiddenValue)
 })

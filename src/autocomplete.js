@@ -23,7 +23,7 @@ export default class Autocomplete extends Controller {
   connect() {
     this.close()
 
-    this.inputTarget.hasAttribute("autocomplete") || this.inputTarget.setAttribute("autocomplete", "off")
+    if(!this.inputTarget.hasAttribute("autocomplete")) this.inputTarget.setAttribute("autocomplete", "off")
     this.inputTarget.setAttribute("spellcheck", "false")
 
     this.mouseDown = false
@@ -131,7 +131,7 @@ export default class Autocomplete extends Controller {
       return
     }
 
-    const textValue = this.extractTextValue(selected)
+    const textValue = selected.getAttribute("data-autocomplete-label") || selected.textContent.trim()
     const value = selected.getAttribute("data-autocomplete-value") || textValue
     this.inputTarget.value = textValue
 
@@ -286,11 +286,6 @@ export default class Autocomplete extends Controller {
   headersForFetch() {
     return { "X-Requested-With": "XMLHttpRequest" } // override if you need
   }
-
-  extractTextValue = el =>
-    el.hasAttribute("data-autocomplete-label")
-      ? el.getAttribute("data-autocomplete-label")
-      : el.textContent.trim()
 }
 
 const debounce = (fn, delay = 10) => {
