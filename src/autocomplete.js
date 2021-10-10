@@ -1,5 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
+const optionSelector = "[role='option']:not([aria-disabled])"
+
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static classes = ["selected"]
@@ -62,9 +64,7 @@ export default class Autocomplete extends Controller {
 
   sibling(next) {
     const options = Array.from(
-      this.resultsTarget.querySelectorAll(
-        '[role="option"]:not([aria-disabled])'
-      )
+      this.resultsTarget.querySelectorAll(optionSelector)
     )
     const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
     const index = options.indexOf(selected)
@@ -179,7 +179,7 @@ export default class Autocomplete extends Controller {
 
   onResultsClick(event) {
     if (!(event.target instanceof Element)) return
-    const selected = event.target.closest('[role="option"]')
+    const selected = event.target.closest(optionSelector)
     if (selected) this.commit(selected)
   }
 
@@ -201,7 +201,7 @@ export default class Autocomplete extends Controller {
   identifyOptions() {
     let id = 0
     for (const el of this.resultsTarget.querySelectorAll(
-      '[role="option"]:not([id])'
+      `${optionSelector}:not([id])`
     )) {
       el.id = `${this.resultsTarget.id}-option-${id++}`
     }
@@ -238,7 +238,7 @@ export default class Autocomplete extends Controller {
       .then(html => {
         this.resultsTarget.innerHTML = html
         this.identifyOptions()
-        const hasResults = !!this.resultsTarget.querySelector('[role="option"]')
+        const hasResults = !!this.resultsTarget.querySelector(optionSelector)
         if (hasResults) {
           this.open()
         } else {
