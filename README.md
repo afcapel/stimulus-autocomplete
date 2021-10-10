@@ -24,6 +24,13 @@ const application = Application.start()
 application.register('autocomplete', Autocomplete)
 ```
 
+If the JS bundler you're using doesn't recognise ES modules yet -for example Webpack v4-
+you might need to import the controller using the full path to source file:
+
+```javascript
+import { Autocomplete } from 'stimulus-autocomplete/src/autocomplete'
+```
+
 To use the autocomplete, you need some markup as this:
 
 ```html
@@ -113,7 +120,7 @@ Events on the optional hidden input:
 ## Examples
 
 - [The example directory](https://github.com/afcapel/stimulus-autocomplete/tree/main/example) contains a minimal example of how to use the library as a ES module.
-- [This example Rails 7 app](https://github.com/afcapel/stimulus-autocomplete-rails-example) shows how to use it with  Webpack.
+- [This example Rails app](https://github.com/afcapel/stimulus-autocomplete-rails-example) shows how to use it with  Webpack.
 - [Autocomplete with StimulusJS - Drifting Ruby](https://www.driftingruby.com/episodes/autocomplete-with-stimulusjs)
 - [Search Autocomplete Stimulus](https://itnext.io/search-autocomplete-stimulus-4e941df54d39?sk=a09dbf0e1ca8cd2f544ba34b78f739f0)
 
