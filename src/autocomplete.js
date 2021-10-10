@@ -180,11 +180,9 @@ export default class Autocomplete extends Controller {
 
   onResultsMouseDown() {
     this.mouseDown = true
-    this.resultsTarget.addEventListener(
-      "mouseup",
-      () => (this.mouseDown = false),
-      { once: true }
-    )
+    this.resultsTarget.addEventListener("mouseup",() => {
+      this.mouseDown = false
+    }, { once: true })
   }
 
   onInputChange() {
