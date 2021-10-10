@@ -1,6 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 const optionSelector = "[role='option']:not([aria-disabled])"
+const activeSelector = "[aria-selected='true']"
 
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
@@ -63,10 +64,8 @@ export default class Autocomplete extends Controller {
   }
 
   sibling(next) {
-    const options = Array.from(
-      this.resultsTarget.querySelectorAll(optionSelector)
-    )
-    const selected = this.resultsTarget.querySelector('[aria-selected="true"]')
+    const options = this.options
+    const selected = this.selectedOption
     const index = options.indexOf(selected)
     const sibling = next ? options[index + 1] : options[index - 1]
     const def = next ? options[0] : options[options.length - 1]
@@ -74,12 +73,12 @@ export default class Autocomplete extends Controller {
   }
 
   select(target) {
-    for (const el of this.resultsTarget.querySelectorAll(
-      '[aria-selected="true"]'
-    )) {
-      el.removeAttribute("aria-selected")
-      el.classList.remove(...this.selectedClassesOrDefault)
+    const previouslySelected = this.selectedOption
+    if (previouslySelected) {
+      previouslySelected.removeAttribute("aria-selected")
+      previouslySelected.classList.remove(...this.selectedClassesOrDefault)
     }
+
     target.setAttribute("aria-selected", "true")
     target.classList.add(...this.selectedClassesOrDefault)
     this.inputTarget.setAttribute("aria-activedescendant", target.id)
@@ -111,9 +110,7 @@ export default class Autocomplete extends Controller {
         break
       case "Tab":
         {
-          const selected = this.resultsTarget.querySelector(
-            '[aria-selected="true"]'
-          )
+          const selected = this.selectedOption
           if (selected) {
             this.commit(selected)
           }
@@ -121,9 +118,7 @@ export default class Autocomplete extends Controller {
         break
       case "Enter":
         {
-          const selected = this.resultsTarget.querySelector(
-            '[aria-selected="true"]'
-          )
+          const selected = this.selectedOption
           if (selected && !this.isHidden) {
             this.commit(selected)
             if (!this.hasSubmitOnEnterValue) {
@@ -238,7 +233,7 @@ export default class Autocomplete extends Controller {
       .then(html => {
         this.resultsTarget.innerHTML = html
         this.identifyOptions()
-        const hasResults = !!this.resultsTarget.querySelector(optionSelector)
+        const hasResults = !!this.options
         if (hasResults) {
           this.open()
         } else {
@@ -280,6 +275,14 @@ export default class Autocomplete extends Controller {
         detail: { action: 'close', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
+  }
+
+  get options() {
+    return Array.from(this.resultsTarget.querySelectorAll(optionSelector))
+  }
+
+  get selectedOption() {
+    return this.resultsTarget.querySelector(activeSelector)
   }
 
   get selectedClassesOrDefault() {
