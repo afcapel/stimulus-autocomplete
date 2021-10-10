@@ -1,4 +1,4 @@
-const input = "input[name=simple-input]"
+const input = "input[name=birds]"
 const hidden = "input[name=bird_id]"
 const optionSelector = "li[role=option]"
 const secondOption = "li[data-autocomplete-value='2']"
