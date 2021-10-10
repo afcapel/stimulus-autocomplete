@@ -32,7 +32,7 @@
     "@hotwired/stimulus": "^3.0.0"
   },
   "scripts": {
-    "start": "http-server ./example -p 3030",
+    "start": "http-server ./examples -p 3030",
     "cy:run:chrome": "cypress run --browser chrome",
     "cy:run:firefox": "cypress run --browser firefox",
     "cy:run": "cypress run",
