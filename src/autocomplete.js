@@ -180,14 +180,14 @@ export default class Autocomplete extends Controller {
 
   onResultsMouseDown() {
     this.mouseDown = true
-    this.resultsTarget.addEventListener("mouseup",() => {
+    this.resultsTarget.addEventListener("mouseup", () => {
       this.mouseDown = false
     }, { once: true })
   }
 
   onInputChange() {
     this.element.removeAttribute("value")
-    if (this.hasHiddenTarget) this.hiddenTarget.value = ''
+    if (this.hasHiddenTarget) this.hiddenTarget.value = ""
     this.fetchResults()
   }
 
@@ -255,7 +255,7 @@ export default class Autocomplete extends Controller {
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { action: 'open', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
+        detail: { action: "open", inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
   }
@@ -270,7 +270,7 @@ export default class Autocomplete extends Controller {
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
-        detail: { action: 'close', inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
+        detail: { action: "close", inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
   }
