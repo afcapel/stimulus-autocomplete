@@ -77,45 +77,42 @@ export default class Autocomplete extends Controller {
   }
 
   onKeydown = (event) => {
-    switch (event.key) {
-      case "Escape":
-        if (!this.isHidden) {
-          this.hideAndRemoveOptions()
-          event.stopPropagation()
-          event.preventDefault()
-        }
-        break
-      case "ArrowDown":
-        {
-          const item = this.sibling(true)
-          if (item) this.select(item)
-          event.preventDefault()
-        }
-        break
-      case "ArrowUp":
-        {
-          const item = this.sibling(false)
-          if (item) this.select(item)
-          event.preventDefault()
-        }
-        break
-      case "Tab":
-        {
-          const selected = this.selectedOption
-          if (selected) this.commit(selected)
-        }
-        break
-      case "Enter":
-        {
-          const selected = this.selectedOption
-          if (selected && !this.isHidden) {
-            this.commit(selected)
-            if (!this.hasSubmitOnEnterValue) {
-              event.preventDefault()
-            }
-          }
-        }
-        break
+    const handler = this[`on${event.key}Keydown`]
+    if (handler) handler(event)
+  }
+
+  onEscapeKeydown = (event) => {
+    if (this.isHidden) return
+
+    this.hideAndRemoveOptions()
+    event.stopPropagation()
+    event.preventDefault()
+  }
+
+  onArrowDownKeydown = (event) => {
+    const item = this.sibling(true)
+    if (item) this.select(item)
+    event.preventDefault()
+  }
+
+  onArrowUpKeydown = (event) => {
+    const item = this.sibling(false)
+    if (item) this.select(item)
+    event.preventDefault()
+  }
+
+  onTabKeydown = (event) => {
+    const selected = this.selectedOption
+    if (selected) this.commit(selected)
+  }
+
+  onEnterKeydown = (event) => {
+    const selected = this.selectedOption
+    if (selected && !this.isHidden) {
+      this.commit(selected)
+      if (!this.hasSubmitOnEnterValue) {
+        event.preventDefault()
+      }
     }
   }
 
