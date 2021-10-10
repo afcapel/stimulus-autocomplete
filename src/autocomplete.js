@@ -28,12 +28,6 @@ export default class Autocomplete extends Controller {
 
     this.mouseDown = false
 
-    this.onInputChange = debounce(this.onInputChange.bind(this), 300)
-    this.onResultsClick = this.onResultsClick.bind(this)
-    this.onResultsMouseDown = this.onResultsMouseDown.bind(this)
-    this.onInputBlur = this.onInputBlur.bind(this)
-    this.onKeydown = this.onKeydown.bind(this)
-
     this.inputTarget.addEventListener("keydown", this.onKeydown)
     this.inputTarget.addEventListener("blur", this.onInputBlur)
     this.inputTarget.addEventListener("input", this.onInputChange)
@@ -55,10 +49,7 @@ export default class Autocomplete extends Controller {
       this.inputTarget.removeEventListener("input", this.onInputChange)
     }
     if (this.hasResultsTarget) {
-      this.resultsTarget.removeEventListener(
-        "mousedown",
-        this.onResultsMouseDown
-      )
+      this.resultsTarget.removeEventListener("mousedown", this.onResultsMouseDown)
       this.resultsTarget.removeEventListener("click", this.onResultsClick)
     }
   }
@@ -85,7 +76,7 @@ export default class Autocomplete extends Controller {
     target.scrollIntoView(false)
   }
 
-  onKeydown(event) {
+  onKeydown = (event) => {
     switch (event.key) {
       case "Escape":
         if (!this.isHidden) {
@@ -128,7 +119,7 @@ export default class Autocomplete extends Controller {
     }
   }
 
-  onInputBlur() {
+  onInputBlur = () => {
     if (this.mouseDown) return
     this.close()
   }
@@ -170,24 +161,24 @@ export default class Autocomplete extends Controller {
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
   }
 
-  onResultsClick(event) {
+  onResultsClick = (event) => {
     if (!(event.target instanceof Element)) return
     const selected = event.target.closest(optionSelector)
     if (selected) this.commit(selected)
   }
 
-  onResultsMouseDown() {
+  onResultsMouseDown = () => {
     this.mouseDown = true
     this.resultsTarget.addEventListener("mouseup", () => {
       this.mouseDown = false
     }, { once: true })
   }
 
-  onInputChange() {
+  onInputChange = debounce(() => {
     this.element.removeAttribute("value")
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
     this.fetchResults()
-  }
+  })
 
   identifyOptions() {
     let id = 0
@@ -202,7 +193,25 @@ export default class Autocomplete extends Controller {
     this.resultsTarget.innerHTML = null
   }
 
-  fetchResults() {
+  fetchResults = async () => {
+    if (!this.hasUrlValue) return
+
+    const url = this.buildQueryURL()
+    if(!url) return
+
+    try {
+      this.element.dispatchEvent(new CustomEvent("loadstart"))
+      const html = await this.doFetch(url)
+      this.replaceResults(html)
+      this.element.dispatchEvent(new CustomEvent("load"))
+      this.element.dispatchEvent(new CustomEvent("loadend"))
+    } catch(error) {
+      this.element.dispatchEvent(new CustomEvent("error"))
+      this.element.dispatchEvent(new CustomEvent("loadend"))
+    }
+  }
+
+  buildQueryURL() {
     const query = this.inputTarget.value.trim()
 
     if (!query || query.length < this.minLengthValue) {
@@ -210,9 +219,6 @@ export default class Autocomplete extends Controller {
       return null
     }
 
-    if (!this.hasUrlValue) return
-
-    const headers = this.headersForFetch()
     const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
     params.append("q", query)
