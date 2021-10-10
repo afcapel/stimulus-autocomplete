@@ -208,6 +208,7 @@ export default class Autocomplete extends Controller {
     } catch(error) {
       this.element.dispatchEvent(new CustomEvent("error"))
       this.element.dispatchEvent(new CustomEvent("loadend"))
+      throw error
     }
   }
 
