@@ -212,6 +212,10 @@ export default class Autocomplete extends Controller {
     this.resultsTarget.innerHTML = null
   }
 
+  headersForFetch() {
+    return { "X-Requested-With": "XMLHttpRequest" }
+  }
+
   fetchResults() {
     const query = this.inputTarget.value.trim()
     if (!query || query.length < this.minLengthValue) {
@@ -221,7 +225,7 @@ export default class Autocomplete extends Controller {
 
     if (!this.hasUrlValue) return
 
-    const headers = { "X-Requested-With": "XMLHttpRequest" }
+    const headers = this.headersForFetch()
     const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
     params.append("q", query)
