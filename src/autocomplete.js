@@ -191,11 +191,10 @@ export default class Autocomplete extends Controller {
 
   identifyOptions() {
     let id = 0
-    for (const el of this.resultsTarget.querySelectorAll(
-      `${optionSelector}:not([id])`
-    )) {
+    const optionsWithoutId = this.resultsTarget.querySelectorAll(`${optionSelector}:not([id])`)
+    optionsWithoutId.forEach((el) => {
       el.id = `${this.resultsTarget.id}-option-${id++}`
-    }
+    })
   }
 
   hideAndRemoveOptions() {
