@@ -3,8 +3,8 @@ const hidden = "input[name=bird_id]"
 const optionSelector = "li[role=option]"
 const secondOption = "li[data-autocomplete-value='2']"
 
-Cypress.Commands.add("loadPage", () => {
-  cy.visit("/")
+Cypress.Commands.add("loadPage", (path = "/") => {
+  cy.visit(path)
   cy.get("[data-autocomplete-ready-value]").should("be.visible")
 })
 
@@ -28,8 +28,8 @@ Cypress.Commands.add("clickSecondResult", () => {
   cy.get(secondOption).click()
 })
 
-Cypress.Commands.add("assertSecondResultActive", () => {
-  cy.get(secondOption).should("have.class", "active")
+Cypress.Commands.add("assertSecondResultActive", (selectedClass = "active") => {
+  cy.get(secondOption).should("have.class", selectedClass)
 })
 
 Cypress.Commands.add("assertSecondResultSelected", () => {
