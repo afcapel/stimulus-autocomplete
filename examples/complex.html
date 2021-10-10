@@ -33,12 +33,11 @@
 
 <body>
   <div class="container">
-    <h1 class="container my-5">Stimulus autocomplete test</h1>
-
+    <h1 class="container my-5">Complex results</h1>
     <div class="mb-3">
-      <label for="birds">Plain text bird names</label>
-      <div data-controller="autocomplete" data-autocomplete-url-value="/results-plain-text.html">
-        <input name="birds" type="text" class="form-control" data-autocomplete-target="input" placeholder="search a bird" autofocus/>
+      <label for="birds">Complex results for bird names</label>
+      <div data-controller="autocomplete" data-autocomplete-url-value="/results-complex.html">
+        <input name="birds" type="text" class="form-control" data-autocomplete-target="input" placeholder="search a bird"/>
         <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
         <ul data-autocomplete-target="results" class="list-group"></ul>
       </div>
