@@ -24,13 +24,6 @@ const application = Application.start()
 application.register('autocomplete', Autocomplete)
 ```
 
-If the JS bundler you're using doesn't recognise ES modules yet -for example Webpack v4-
-you might need to import the controller using the full path to source file:
-
-```javascript
-import { Autocomplete } from 'stimulus-autocomplete/src/autocomplete'
-```
-
 To use the autocomplete, you need some markup as this:
 
 ```html
