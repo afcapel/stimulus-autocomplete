@@ -176,7 +176,7 @@ export default class Autocomplete extends Controller {
     this.element.removeAttribute("value")
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
     this.fetchResults()
-  })
+  }, 300)
 
   identifyOptions() {
     let id = 0
