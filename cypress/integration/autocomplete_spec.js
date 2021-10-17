@@ -49,6 +49,22 @@ describe("Stimulus autocomplete", () => {
     cy.typeDownTwice()
     cy.assertSecondResultActive("selected-result")
   })
+
+  it("emits events", () => {
+    cy.loadPage("/events.html")
+    cy.enterTerm("bird")
+    cy.assertResultsVisible()
+
+    cy.assertEventEmitted("toggle")
+    cy.assertEventEmitted("loadstart")
+    cy.assertEventEmitted("load")
+    cy.assertEventEmitted("loadend")
+
+    cy.typeDownTwice()
+    cy.typeEnter()
+
+    cy.assertEventEmitted("autocomplete.change")
+  })
 })
 
 

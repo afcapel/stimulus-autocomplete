@@ -36,3 +36,7 @@ Cypress.Commands.add("assertSecondResultSelected", (textValue = "Bluebird", hidd
   cy.get(input).should("have.value", textValue)
   cy.get(hidden).should("have.value", hiddenValue)
 })
+
+Cypress.Commands.add("assertEventEmitted", (eventType) => {
+  cy.get('p.event').contains(`${eventType} event emitted`)
+})
