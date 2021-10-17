@@ -1,7 +1,7 @@
 # Stimulus Autocomplete controller
 
 This is a tiny stimulus controller (1.5kB gzipped) to make a selection from a
-list of results fetched from the server.
+list of results fetched from the server. [See it in action](https://stimulus-autocomplete.netlify.app/).
 
 ![Demo](https://media.giphy.com/media/5dYbYLVX4fSbbdyN84/giphy.gif)
 
