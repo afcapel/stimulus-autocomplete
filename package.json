@@ -39,6 +39,7 @@
     "cy:run": "cypress run",
     "cy:all": "yarn run cy:run:chrome && yarn run cy:run:firefox",
     "test": "start-server-and-test start http://localhost:3030 cy:run",
-    "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all"
+    "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all",
+    "netlify:deploy": "rm examples/stimulus-autocomplete.js && cp -f src/autocomplete.js examples/stimulus-autocomplete.js"
   }
 }
