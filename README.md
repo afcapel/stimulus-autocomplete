@@ -133,7 +133,7 @@ To release a new version follow these steps:
 1. Update the version number in `package.json`. Try to follow
 semantic versioning guidelines as much as possible.
 
-2. Publish the package to npmjs.com with `npm publish`
+2. Publish the package to npmjs.com with `yarn run release`
 
 ## License
 
