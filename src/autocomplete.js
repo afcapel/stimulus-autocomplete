@@ -149,7 +149,7 @@ export default class Autocomplete extends Controller {
     this.element.dispatchEvent(
       new CustomEvent("autocomplete.change", {
         bubbles: true,
-        detail: { value: value, textValue: textValue }
+        detail: { value: value, textValue: textValue, selected: selected }
       })
     )
   }
