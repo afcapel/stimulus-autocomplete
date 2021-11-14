@@ -1,6 +1,6 @@
 {
   "name": "stimulus-autocomplete",
-  "version": "3.0.0-rc.4",
+  "version": "3.0.0-rc.5",
   "description": "StimulusJS autocomplete component",
   "type": "module",
   "main": "src/autocomplete.js",
@@ -41,6 +41,6 @@
     "test": "start-server-and-test start http://localhost:3030 cy:run",
     "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all",
     "netlify:deploy": "rm examples/stimulus-autocomplete.js && cp -f src/autocomplete.js examples/stimulus-autocomplete.js",
-    "release": "yarn test && npm publish && git commit -am \"$npm_package_name v$npm_package_version\" && git tag v$npm_package_version && git push --tags"
+    "release": "git commit -am \"$npm_package_name v$npm_package_version\" && git tag v$npm_package_version && git push --tags"
   }
 }
