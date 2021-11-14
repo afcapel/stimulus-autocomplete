@@ -1,7 +1,4 @@
 describe("Stimulus autocomplete", () => {
-  beforeEach(() =>{
-  })
-
   it("shows results", () => {
     cy.loadPage()
     cy.enterTerm("bird")
@@ -64,6 +61,17 @@ describe("Stimulus autocomplete", () => {
     cy.typeEnter()
 
     cy.assertEventEmitted("autocomplete.change")
+  })
+
+  it("can access the selected element in autocomplete.change events", () => {
+    cy.loadPage("/process-change-event.html")
+    cy.get('#color').should('be.empty')
+
+    cy.enterTerm("bird")
+    cy.assertResultsVisible()
+    cy.clickSecondResult()
+
+    cy.get('#color').contains('Selected color blue')
   })
 })
 
