@@ -40,6 +40,7 @@
     "cy:all": "yarn run cy:run:chrome && yarn run cy:run:firefox",
     "test": "start-server-and-test start http://localhost:3030 cy:run",
     "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all",
-    "netlify:deploy": "rm examples/stimulus-autocomplete.js && cp -f src/autocomplete.js examples/stimulus-autocomplete.js"
+    "netlify:deploy": "rm examples/stimulus-autocomplete.js && cp -f src/autocomplete.js examples/stimulus-autocomplete.js",
+    "release": "yarn test && npm publish && git commit -am \"$npm_package_name v$npm_package_version\" && git tag v$npm_package_version && git push --tags"
   }
 }
