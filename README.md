@@ -93,10 +93,25 @@ Events on the optional hidden input:
 
 ## Optional parameters
 
-* `min-length` set the minimum number of characters required to make an autocomplete request.
-* `submit-on-enter` submit the form after the autocomplete selection via enter keypress.
+* `data-autocomplete-min-length` set the minimum number of characters required to make an autocomplete request.
+    ```html
+    <div class="form-group" data-controller="autocomplete" data-autocomplete-min-length-value="3" data-autocomplete-url-value="/birds/search">
+      ...
+    </div>
+    ```
+* `data-autocomplete-submit-on-enter` submit the form after the autocomplete selection via enter keypress.
+   ```html
+    <div class="form-group" data-controller="autocomplete" data-autocomplete-submit-on-enter-value="true" data-autocomplete-url-value="/birds/search">
+      ...
+    </div>
+   ```
 * `skip-hidden-property` skip setting the `hidden` property on the element so that you can manually hide and show the element (by listening to the `toggle` event).
 * `data-autocomplete-selected-class` Stimulus Autocomplete adds a default `.active` class to the currently selected result. You can use another class instead of `.active` with the this attribute.
+   ```html
+    <div data-controller="autocomplete" data-autocomplete-url-value="/results-plain-text.html" data-autocomplete-selected-class="selected-result">
+      ...
+    </div>
+  ```
 * `data-autocomplete-label` can be used to define the input label upon selection. That way your option elements can have more elaborate markup, i.e.:
 
   ```html
