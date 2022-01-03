@@ -11,13 +11,6 @@ export default class Autocomplete extends Controller {
     submitOnEnter: Boolean,
     url: String,
     minLength: Number,
-    /*
-     * Should we skip adding/removing the "hidden" property from resultsTarget?
-     *
-     * If set, you must listen to the "toggle" event from this
-     * controller to manually show/hide the results target.
-     */
-    skipHiddenProperty: Boolean,
   }
 
   connect() {
@@ -244,9 +237,7 @@ export default class Autocomplete extends Controller {
 
   open() {
     if (!this.isHidden) return
-    if (!this.hasSkipHiddenPropertyValue) {
-      this.resultsTarget.hidden = false
-    }
+
     this.isHidden = false
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
@@ -258,9 +249,7 @@ export default class Autocomplete extends Controller {
 
   close() {
     if (this.isHidden) return
-    if (!this.hasSkipHiddenPropertyValue) {
-      this.resultsTarget.hidden = true
-    }
+
     this.isHidden = true
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
@@ -269,6 +258,14 @@ export default class Autocomplete extends Controller {
         detail: { action: "close", inputTarget: this.inputTarget, resultsTarget: this.resultsTarget }
       })
     )
+  }
+
+  get isHidden() {
+    return this.resultsTarget.hidden
+  }
+
+  set isHidden(value) {
+    this.resultsTarget.hidden = value
   }
 
   get options() {

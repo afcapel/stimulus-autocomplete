@@ -105,7 +105,6 @@ Events on the optional hidden input:
       ...
     </div>
    ```
-* `skip-hidden-property` skip setting the `hidden` property on the element so that you can manually hide and show the element (by listening to the `toggle` event).
 * `data-autocomplete-selected-class` Stimulus Autocomplete adds a default `.active` class to the currently selected result. You can use another class instead of `.active` with the this attribute.
    ```html
     <div data-controller="autocomplete" data-autocomplete-url-value="/results-plain-text.html" data-autocomplete-selected-class="selected-result">
