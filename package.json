@@ -1,6 +1,6 @@
 {
   "name": "stimulus-autocomplete",
-  "version": "3.0.0-rc.5",
+  "version": "3.0.0-rc.6",
   "description": "StimulusJS autocomplete component",
   "type": "module",
   "main": "src/autocomplete.js",
@@ -27,10 +27,10 @@
     "@hotwired/stimulus": "^3.0.0"
   },
   "devDependencies": {
+    "@hotwired/stimulus": "^3.0.0",
     "cypress": "^8.5.0",
     "http-server": "^13.0.2",
-    "start-server-and-test": "^1.14.0",
-    "@hotwired/stimulus": "^3.0.0"
+    "start-server-and-test": "^1.14.0"
   },
   "scripts": {
     "start": "http-server ./examples -p 3030",
