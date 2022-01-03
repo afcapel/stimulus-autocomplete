@@ -30,6 +30,11 @@
       padding-top: 1000px;
       height: 4000px;
     }
+
+    .results {
+      max-height: 200px;
+      overflow-y: auto;
+    }
   </style>
 </head>
 
@@ -39,10 +44,10 @@
 
     <div class="mb-3">
       <label for="birds">Plain text bird names</label>
-      <div data-controller="autocomplete" data-autocomplete-url-value="/results-plain-text.html">
+      <div data-controller="autocomplete" data-autocomplete-url-value="/results-long.html">
         <input name="birds" type="text" class="form-control" data-autocomplete-target="input" placeholder="search a bird" autofocus/>
         <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
-        <ul data-autocomplete-target="results" class="list-group"></ul>
+        <ul data-autocomplete-target="results" class="results list-group"></ul>
       </div>
     </div>
   </div>
