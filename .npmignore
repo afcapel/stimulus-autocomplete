@@ -1,0 +1,8 @@
+.DS_Store
+/node_modules
+/examples
+/cypress
+/.github
+cypress.json
+yarn-error.log
+yarn.lock
