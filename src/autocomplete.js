@@ -220,7 +220,7 @@ export default class Autocomplete extends Controller {
   }
 
   doFetch = async (url) => {
-    const response = await fetch(url, this.headersForFetch())
+    const response = await fetch(url, this.optionsForFetch())
     const html = await response.text()
     return html
   }
@@ -280,8 +280,8 @@ export default class Autocomplete extends Controller {
     return this.hasSelectedClass ? this.selectedClasses : ["active"]
   }
 
-  headersForFetch() {
-    return { "X-Requested-With": "XMLHttpRequest" } // override if you need
+  optionsForFetch() {
+    return { headers: { "X-Requested-With": "XMLHttpRequest" } } // override if you need
   }
 }
 
