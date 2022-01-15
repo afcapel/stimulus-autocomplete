@@ -76,7 +76,7 @@ export default class Autocomplete extends Controller {
   }
 
   onEscapeKeydown = (event) => {
-    if (this.isHidden) return
+    if (!this.resultsShown) return
 
     this.hideAndRemoveOptions()
     event.stopPropagation()
@@ -102,7 +102,7 @@ export default class Autocomplete extends Controller {
 
   onEnterKeydown = (event) => {
     const selected = this.selectedOption
-    if (selected && !this.isHidden) {
+    if (selected && this.resultsShown) {
       this.commit(selected)
       if (!this.hasSubmitOnEnterValue) {
         event.preventDefault()
@@ -236,9 +236,9 @@ export default class Autocomplete extends Controller {
   }
 
   open() {
-    if (!this.isHidden) return
+    if (this.resultsShown) return
 
-    this.isHidden = false
+    this.resultsShown = true
     this.element.setAttribute("aria-expanded", "true")
     this.element.dispatchEvent(
       new CustomEvent("toggle", {
@@ -248,9 +248,9 @@ export default class Autocomplete extends Controller {
   }
 
   close() {
-    if (this.isHidden) return
+    if (!this.resultsShown) return
 
-    this.isHidden = true
+    this.resultsShown = false
     this.inputTarget.removeAttribute("aria-activedescendant")
     this.element.setAttribute("aria-expanded", "false")
     this.element.dispatchEvent(
@@ -260,12 +260,12 @@ export default class Autocomplete extends Controller {
     )
   }
 
-  get isHidden() {
-    return this.resultsTarget.hidden
+  get resultsShown() {
+    return !this.resultsTarget.hidden
   }
 
-  set isHidden(value) {
-    this.resultsTarget.hidden = value
+  set resultsShown(value) {
+    this.resultsTarget.hidden = !value
   }
 
   get options() {
