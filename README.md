@@ -73,20 +73,6 @@ selected result.
 * `loadend` fires when the request for results ends, successfully or not.
 * `toggle` fires when the results element is shown or hidden.
 
-Be careful, to handle `autocomplete.change` event, you need to add it to event listener:
-
-```js
-export default class extends Controller {
-    connect() {
-        document.addEventListener("autocomplete.change", this.autocomplete.bind(this))
-    }
-
-    autocomplete(event) {
-        console.log(event);
-    }
-}
-```
-
 Events on the optional hidden input:
 
 * `input` and `change` dispatched to it when the users selects a new value from the autocomplete. This allows you to bind subsequent behavior directly to the `<input type=hidden>` element.
