@@ -3,15 +3,6 @@ import { Controller } from "@hotwired/stimulus"
 const optionSelector = "[role='option']:not([aria-disabled])"
 const activeSelector = "[aria-selected='true']"
 
-const debounce = (fn, delay = 10) => {
-  let timeoutId = null
-
-  return (...args) => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(fn, delay)
-  }
-}
-
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static classes = ["selected"]
@@ -29,6 +20,8 @@ export default class Autocomplete extends Controller {
     this.inputTarget.setAttribute("spellcheck", "false")
 
     this.mouseDown = false
+
+    this.onInputChange = debounce(this.onInputChange, 300)
 
     this.inputTarget.addEventListener("keydown", this.onKeydown)
     this.inputTarget.addEventListener("blur", this.onInputBlur)
@@ -174,7 +167,7 @@ export default class Autocomplete extends Controller {
     }, { once: true })
   }
 
-  onInputChange = debounce(() => {
+  onInputChange = () => {
     this.element.removeAttribute("value")
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
 
@@ -184,7 +177,7 @@ export default class Autocomplete extends Controller {
     } else {
       this.hideAndRemoveOptions()
     }
-  }, 300)
+  }
 
   identifyOptions() {
     let id = 0
@@ -288,6 +281,15 @@ export default class Autocomplete extends Controller {
 
   optionsForFetch() {
     return { headers: { "X-Requested-With": "XMLHttpRequest" } } // override if you need
+  }
+}
+
+const debounce = (fn, delay = 10) => {
+  let timeoutId = null
+
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(fn, delay)
   }
 }
 
