@@ -110,6 +110,27 @@ Events on the optional hidden input:
 
 * If the `<input>` target has an `autofocus` attribute then the input will be given focus immediately so the user can start typing. This is useful if the `<input>` is dynamically added/morphed into the DOM (say by a "edit" button) and the user expects to start typing immediately.
 
+# Extension points
+
+### URL building
+
+The autcomplete default behaviour is to add a `q` querystring parameter to the the base `data-autocomplete-url`. If you need a different format, you can override the controllers `buildURL` method.
+
+```js
+import { Application } from '@hotwired/stimulus'
+import { Autocomplete } from 'stimulus-autocomplete'
+
+const application = Application.start()
+
+class CustomAutocomplete extends Autocomplete {
+  buildURL(query) {
+    return `${new URL(this.urlValue, window.location.href).toString()}/${query}`
+  }
+}
+
+application.register('autocomplete', CustomAutocomplete)
+```
+
 ## Examples
 
 - [The examples directory](https://github.com/afcapel/stimulus-autocomplete/tree/main/examples) contains some examples of how to use the library.
