@@ -11,6 +11,7 @@ export default class Autocomplete extends Controller {
     ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
+    queryParam: { type: String, default: "q" },
     minLength: Number,
   }
 
@@ -217,7 +218,7 @@ export default class Autocomplete extends Controller {
       return url.toString() + `/${query}`
     } else {
       const params = new URLSearchParams(url.search.slice(1))
-      params.append("q", query)
+      params.append(this.queryParam, query)
       url.search = params.toString()
       return url.toString()
     }
