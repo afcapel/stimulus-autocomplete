@@ -3,6 +3,15 @@ import { Controller } from "@hotwired/stimulus"
 const optionSelector = "[role='option']:not([aria-disabled])"
 const activeSelector = "[aria-selected='true']"
 
+const debounce = (fn, delay = 10) => {
+  let timeoutId = null
+
+  return (...args) => {
+    clearTimeout(timeoutId)
+    timeoutId = setTimeout(fn, delay)
+  }
+}
+
 export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static classes = ["selected"]
@@ -279,15 +288,6 @@ export default class Autocomplete extends Controller {
 
   optionsForFetch() {
     return { headers: { "X-Requested-With": "XMLHttpRequest" } } // override if you need
-  }
-}
-
-const debounce = (fn, delay = 10) => {
-  let timeoutId = null
-
-  return (...args) => {
-    clearTimeout(timeoutId)
-    timeoutId = setTimeout(fn, delay)
   }
 }
 
