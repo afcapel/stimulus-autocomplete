@@ -42,6 +42,6 @@
     "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all",
     "netlify:deploy": "rm examples/stimulus-autocomplete.js && cp -f src/autocomplete.js examples/stimulus-autocomplete.js",
     "postversion": "git push && git push --tags",
-    "release": "yarn test && yarn version && npm publish"
+    "release": "yarn test && yarn version && npm adduser && npm publish"
   }
 }
