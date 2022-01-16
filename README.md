@@ -105,6 +105,20 @@ Events on the optional hidden input:
     <p class="text-muted"><small>That's also the name of an airplane</small></p>
   </li>
   ```
+* `data-autocomplete-restAPI` can be used to send a query to a REST API, i.e.:
+
+  ```html
+  <div class="form-group" data-controller="autocomplete" data-autocomplete-url-value="/birds/search" data-autocomplete-restAPI-value=true>
+    ...
+  </div>
+  ```
+* `data-autocomplete-queryParam` can be used to change the query parameter name, i.e.:
+
+  ```html
+  <div class="form-group" data-controller="autocomplete" data-autocomplete-url-value="/birds/search" data-autocomplete-queryParam-value="query">
+    ...
+  </div>
+  ```
 
 ## Optional HTML configuration
 
