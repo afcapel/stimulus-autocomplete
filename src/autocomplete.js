@@ -7,7 +7,7 @@ export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static classes = ["selected"]
   static values = {
-    restAPI: Boolean,
+    restAPI: { type: Boolean, default: false },
     ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
