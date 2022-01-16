@@ -213,15 +213,14 @@ export default class Autocomplete extends Controller {
     }
 
     const url = new URL(this.urlValue, window.location.href)
-    const params = new URLSearchParams(url.search.slice(1))
-    if (restAPI) {
-      console.log(url.search)
+    if (this.restAPI) {
+      return url.toString() + `/${query}`
     } else {
+      const params = new URLSearchParams(url.search.slice(1))
       params.append("q", query)
       url.search = params.toString()
+      return url.toString()
     }
-
-    return url.toString()
   }
 
   doFetch = async (url) => {
