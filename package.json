@@ -1,6 +1,6 @@
 {
   "name": "stimulus-autocomplete",
-  "version": "3.0.0-rc.7",
+  "version": "3.0.0",
   "description": "StimulusJS autocomplete component",
   "type": "module",
   "main": "src/autocomplete.js",
