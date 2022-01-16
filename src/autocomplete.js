@@ -168,7 +168,13 @@ export default class Autocomplete extends Controller {
   onInputChange = debounce(() => {
     this.element.removeAttribute("value")
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
-    this.fetchResults()
+
+    const query = this.inputTarget.value.trim()
+    if (query && query.length >= this.minLengthValue) {
+      this.fetchResults(query)
+    } else {
+      this.hideAndRemoveOptions()
+    }
   }, 300)
 
   identifyOptions() {
@@ -184,12 +190,10 @@ export default class Autocomplete extends Controller {
     this.resultsTarget.innerHTML = null
   }
 
-  fetchResults = async () => {
+  fetchResults = async (query) => {
     if (!this.hasUrlValue) return
 
-    const url = this.buildQueryURL()
-    if(!url) return
-
+    const url = this.buildURL(query)
     try {
       this.element.dispatchEvent(new CustomEvent("loadstart"))
       const html = await this.doFetch(url)
@@ -203,14 +207,7 @@ export default class Autocomplete extends Controller {
     }
   }
 
-  buildQueryURL() {
-    const query = this.inputTarget.value.trim()
-
-    if (!query || query.length < this.minLengthValue) {
-      this.hideAndRemoveOptions()
-      return null
-    }
-
+  buildURL(query) {
     const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
     params.append("q", query)
