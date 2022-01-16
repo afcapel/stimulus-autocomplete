@@ -7,6 +7,7 @@ export default class Autocomplete extends Controller {
   static targets = ["input", "hidden", "results"]
   static classes = ["selected"]
   static values = {
+    restAPI: Boolean,
     ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
@@ -213,8 +214,12 @@ export default class Autocomplete extends Controller {
 
     const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
-    params.append("q", query)
-    url.search = params.toString()
+    if (restAPI) {
+      console.log(url.search)
+    } else {
+      params.append("q", query)
+      url.search = params.toString()
+    }
 
     return url.toString()
   }
