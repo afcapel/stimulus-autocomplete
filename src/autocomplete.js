@@ -39,7 +39,6 @@ export default class Autocomplete extends Controller {
   disconnect() {
     if (this.hasInputTarget) {
       this.inputTarget.removeEventListener("keydown", this.onKeydown)
-      this.inputTarget.removeEventListener("focus", this.onInputFocus)
       this.inputTarget.removeEventListener("blur", this.onInputBlur)
       this.inputTarget.removeEventListener("input", this.onInputChange)
     }
