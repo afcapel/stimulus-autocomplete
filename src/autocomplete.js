@@ -289,8 +289,8 @@ export default class Autocomplete extends Controller {
 
 class SelectedOption extends Controller {
   static template = (name, value, label) => `<div class="selected-option" data-controller="selected-option">
-    <span class="selected-option-label">${label}</span>
-    <input type="hidden" name="${name}" value="${value}">
+    <span class="selected-option-label">${escapeHtml(label)}</span>
+    <input type="hidden" name="${escapeHtml(name)}" value="${escapeHtml(value)}">
     <button data-action="selected-option#remove">remove</button>
     </div>
   `
@@ -311,6 +311,15 @@ const debounce = (fn, delay = 10) => {
     clearTimeout(timeoutId)
     timeoutId = setTimeout(fn, delay)
   }
+}
+
+const escapeHtml = (unsafe) => {
+    return unsafe
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;")
 }
 
 export { Autocomplete, SelectedOption }
