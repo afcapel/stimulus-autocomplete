@@ -8,6 +8,7 @@ export default class Autocomplete extends Controller {
   static classes = ["selected"]
   static values = {
     ready: Boolean,
+    multi: Boolean,
     submitOnEnter: Boolean,
     url: String,
     minLength: Number,
@@ -129,7 +130,10 @@ export default class Autocomplete extends Controller {
     const value = selected.getAttribute("data-autocomplete-value") || textValue
     this.inputTarget.value = textValue
 
-    if (this.hasHiddenTarget) {
+    if (this.multiValue) {
+      SelectedOption.addTo(this, this.hiddenTarget.name, value, textValue)
+      this.inputTarget.value = ""
+    } else if (this.hasHiddenTarget) {
       this.hiddenTarget.value = value
       this.hiddenTarget.dispatchEvent(new Event("input"))
       this.hiddenTarget.dispatchEvent(new Event("change"))
@@ -283,6 +287,23 @@ export default class Autocomplete extends Controller {
   }
 }
 
+class SelectedOption extends Controller {
+  static template = (name, value, label) => `<div class="selected-option" data-controller="selected-option">
+    <span class="selected-option-label">${label}</span>
+    <input type="hidden" name="${name}" value="${value}">
+    <button data-action="selected-option#remove">remove</button>
+    </div>
+  `
+
+  static addTo(controller, name, value, label) {
+    controller.element.insertAdjacentHTML("beforeend", SelectedOption.template(name, value, label))
+  }
+
+  remove() {
+    this.element.remove()
+  }
+}
+
 const debounce = (fn, delay = 10) => {
   let timeoutId = null
 
@@ -292,4 +313,4 @@ const debounce = (fn, delay = 10) => {
   }
 }
 
-export { Autocomplete }
+export { Autocomplete, SelectedOption }
