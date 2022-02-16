@@ -11,6 +11,7 @@ export default class Autocomplete extends Controller {
     submitOnEnter: Boolean,
     url: String,
     minLength: Number,
+    delay: { type: Number, default: 300 },
   }
 
   connect() {
@@ -21,7 +22,7 @@ export default class Autocomplete extends Controller {
 
     this.mouseDown = false
 
-    this.onInputChange = debounce(this.onInputChange, 300)
+    this.onInputChange = debounce(this.onInputChange, this.delayValue)
 
     this.inputTarget.addEventListener("keydown", this.onKeydown)
     this.inputTarget.addEventListener("blur", this.onInputBlur)
