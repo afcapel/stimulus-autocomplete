@@ -1,6 +1,6 @@
 const input = "input[name=birds]"
 const hidden = "input[name=bird_id]"
-const optionSelector = "li[role=option]"
+const optionSelector = "li[role=option][id*='-option-']"
 const secondOption = "li[data-autocomplete-value='2']"
 
 Cypress.Commands.add("loadPage", (path = "/") => {
@@ -30,6 +30,8 @@ Cypress.Commands.add("clickSecondResult", () => {
 
 Cypress.Commands.add("assertSecondResultActive", (selectedClass = "active") => {
   cy.get(secondOption).should("have.class", selectedClass)
+  cy.get(secondOption).should("have.attr", "aria-selected")
+  cy.get(input).should("have.attr", "aria-activedescendant").and('match', /stimulus-autocomplete-option-\d+/)
 })
 
 Cypress.Commands.add("assertSecondResultSelected", (textValue = "Bluebird", hiddenValue = 2) => {
