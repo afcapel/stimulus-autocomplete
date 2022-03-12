@@ -13,6 +13,7 @@ export default class Autocomplete extends Controller {
     minLength: Number,
     delay: { type: Number, default: 300 },
   }
+  static uniqOptionId = 0
 
   connect() {
     this.close()
@@ -180,11 +181,9 @@ export default class Autocomplete extends Controller {
   }
 
   identifyOptions() {
-    let id = 0
+    const prefix = this.resultsTarget.id || "stimulus-autocomplete"
     const optionsWithoutId = this.resultsTarget.querySelectorAll(`${optionSelector}:not([id])`)
-    optionsWithoutId.forEach((el) => {
-      el.id = `${this.resultsTarget.id}-option-${id++}`
-    })
+    optionsWithoutId.forEach(el => el.id = `${prefix}-option-${Autocomplete.uniqOptionId++}`)
   }
 
   hideAndRemoveOptions() {
