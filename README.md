@@ -7,8 +7,16 @@ list of results fetched from the server. [See it in action](https://stimulus-aut
 
 ## Installation
 
+If you are using a js bundler with `node_modules` support (such as esbuild, rollup.js or Webpack) install the package from npm:
+
 ```plain
 yarn add stimulus-autocomplete
+```
+
+If you're using [importmap-rails](https://github.com/rails/importmap-rails), you'll need to pin `stimulus-autocomplete`:
+
+```plain
+./bin/importmap pin stimulus-autocomplete
 ```
 
 ## Usage
