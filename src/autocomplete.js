@@ -12,6 +12,7 @@ export default class Autocomplete extends Controller {
     url: String,
     minLength: Number,
     delay: { type: Number, default: 300 },
+    queryParam: { type: String, default: "q" },
   }
   static uniqOptionId = 0
 
@@ -211,7 +212,7 @@ export default class Autocomplete extends Controller {
   buildURL(query) {
     const url = new URL(this.urlValue, window.location.href)
     const params = new URLSearchParams(url.search.slice(1))
-    params.append("q", query)
+    params.append(this.queryParamValue, query)
     url.search = params.toString()
 
     return url.toString()

@@ -68,6 +68,14 @@ The height of the result list can be limited with CSS, e.g.:
 <ul class="list-group" data-autocomplete-target="results" style="max-height: 10rem; overflow-y: scroll;"></ul>
 ```
 
+If you want a custom query parameter name, use the `data-autocomplete-query-param-value` attribute.
+
+```html
+<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search" data-autocomplete-query-param-value="name" ...>
+```
+
+The above will setup will fetch the results from `/bird/search?name=SEARCH_TEXT`.
+
 ## Events
 
 Events on the main element that registered the controller:
