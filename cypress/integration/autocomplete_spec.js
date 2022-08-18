@@ -63,6 +63,18 @@ describe("Stimulus autocomplete", () => {
     cy.assertEventEmitted("autocomplete.change")
   })
 
+  it("emits an error event on server errors", () => {
+    cy.loadPage("/broken.html")
+
+    cy.on("uncaught:exception", (err) => {
+      expect(err.message).to.include("Server responded with status 404")
+      cy.assertEventEmitted("error")
+      return false
+    })
+
+    cy.enterTerm("bird")
+  })
+
   it("can access the selected element in autocomplete.change events", () => {
     cy.loadPage("/process-change-event.html")
     cy.get('#color').should('be.empty')

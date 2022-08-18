@@ -220,6 +220,11 @@ export default class Autocomplete extends Controller {
 
   doFetch = async (url) => {
     const response = await fetch(url, this.optionsForFetch())
+
+    if (!response.ok) {
+      throw new Error(`Server responded with status ${response.status}`)
+    }
+
     const html = await response.text()
     return html
   }
