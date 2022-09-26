@@ -35,7 +35,7 @@ application.register('autocomplete', Autocomplete)
 To use the autocomplete, you need some markup as this:
 
 ```html
-<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search">
+<div data-controller="autocomplete" data-autocomplete-url-value="/birds/search" role="combobox">
   <input type="text" data-autocomplete-target="input"/>
   <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
   <ul class="list-group" data-autocomplete-target="results"></ul>
