@@ -10,7 +10,7 @@ export default class Autocomplete extends Controller {
     ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
-    minLength: Number,
+    minLength:  { type: Number, default: 1 },
     delay: { type: Number, default: 300 },
     queryParam: { type: String, default: "q" },
   }
@@ -31,6 +31,9 @@ export default class Autocomplete extends Controller {
     this.inputTarget.addEventListener("input", this.onInputChange)
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
     this.resultsTarget.addEventListener("click", this.onResultsClick)
+    if (this.minLengthValue == 0) {
+      this.inputTarget.addEventListener("focus", this.onFocus)
+    }
 
     if (this.inputTarget.hasAttribute("autofocus")) {
       this.inputTarget.focus()
@@ -44,6 +47,9 @@ export default class Autocomplete extends Controller {
       this.inputTarget.removeEventListener("keydown", this.onKeydown)
       this.inputTarget.removeEventListener("blur", this.onInputBlur)
       this.inputTarget.removeEventListener("input", this.onInputChange)
+      if (this.minLengthValue == 0) {
+        this.inputTarget.removeEventListener("focus", this.onFocus)
+      }
     }
 
     if (this.hasResultsTarget) {
@@ -112,6 +118,11 @@ export default class Autocomplete extends Controller {
         event.preventDefault()
       }
     }
+  }
+
+  onFocus = (event) => {
+    if (this.resultsShown) return
+    this.fetchResults()
   }
 
   onInputBlur = () => {
