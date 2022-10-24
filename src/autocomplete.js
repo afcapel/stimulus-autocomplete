@@ -122,7 +122,7 @@ export default class Autocomplete extends Controller {
 
   onFocus = (event) => {
     if (this.resultsShown) return
-    this.fetchResults()
+    this.fetchResults(this.inputTarget.value.trim())
   }
 
   onInputBlur = () => {
