@@ -170,7 +170,6 @@ export default class Autocomplete extends Controller {
   }
 
   onInputChange = () => {
-    this.element.removeAttribute("value")
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
 
     const query = this.inputTarget.value.trim()
