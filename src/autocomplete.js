@@ -237,6 +237,17 @@ export default class Autocomplete extends Controller {
     } else {
       this.close()
     }
+
+    this.evalScripts(html);
+  }
+
+  evalScripts(html) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, "text/html");
+
+    doc?.querySelectorAll("script").forEach((script) => {
+      eval(script.textContent);
+    });
   }
 
   open() {
