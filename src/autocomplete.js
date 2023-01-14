@@ -238,15 +238,18 @@ export default class Autocomplete extends Controller {
       this.close()
     }
 
-    this.evalScripts(html);
+    this.execScripts(html);
   }
 
-  evalScripts(html) {
+  execScripts(html) {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
-    doc?.querySelectorAll("script").forEach((script) => {
-      eval(script.textContent);
+    doc?.querySelectorAll("script").forEach((scriptContent) => {
+      const script = document.createElement('script')
+      script.setAttribute('nonce', cspNonce())
+      script.text = scriptContent
+      document.head.appendChild(script).parentNode.removeChild(script)
     });
   }
 
