@@ -246,11 +246,19 @@ export default class Autocomplete extends Controller {
     const doc = parser.parseFromString(html, "text/html");
 
     doc?.querySelectorAll("script").forEach((scriptContent) => {
-      const script = document.createElement('script')
-      script.setAttribute('nonce', cspNonce())
+      let script = document.createElement('script')
+      script.setAttribute('nonce', this.cspNonce())
       script.text = scriptContent
       document.head.appendChild(script).parentNode.removeChild(script)
     });
+  }
+
+  cspNonce() {
+    return this.getMetaContent('csp-nonce');
+  }
+
+  getMetaContent(str) {
+    return document.querySelector(`meta[name="${str}"]`)?.getAttribute('content');
   }
 
   open() {
