@@ -245,10 +245,10 @@ export default class Autocomplete extends Controller {
     const parser = new DOMParser();
     const doc = parser.parseFromString(html, "text/html");
 
-    doc?.querySelectorAll("script").forEach((scriptContent) => {
+    doc?.querySelectorAll("script").forEach((scriptTag => {
       let script = document.createElement('script')
       script.setAttribute('nonce', this.cspNonce())
-      script.text = scriptContent
+      script.text = scriptTag.innerHTML
       document.head.appendChild(script).parentNode.removeChild(script)
     });
   }
