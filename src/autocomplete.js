@@ -232,7 +232,7 @@ export default class Autocomplete extends Controller {
   replaceResults(html) {
     this.resultsTarget.innerHTML = html
     this.identifyOptions()
-    if (!!this.options && html !== "") {
+    if (!!this.options && html) {
       this.open()
     } else {
       this.close()
