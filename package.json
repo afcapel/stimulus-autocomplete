@@ -38,8 +38,8 @@
     "cy:run:firefox": "cypress run --browser firefox",
     "cy:run": "cypress run",
     "cy:all": "yarn run cy:run:chrome && yarn run cy:run:firefox",
-    "test": "start-server-and-test start http://localhost:3030 cy:run",
-    "test:multibrowser": "start-server-and-test start http://localhost:3030 cy:all",
+    "test": "start-server-and-test start http://127.0.0.1:3030 cy:run",
+    "test:multibrowser": "start-server-and-test start http://127.0.0.1:3030 cy:all",
     "netlify:deploy": "rm examples/stimulus-autocomplete.js && cp -f src/autocomplete.js examples/stimulus-autocomplete.js",
     "postversion": "git push && git push --tags",
     "release": "yarn test && yarn version && npm adduser && npm publish"
