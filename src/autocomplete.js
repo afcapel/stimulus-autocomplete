@@ -71,7 +71,7 @@ export default class Autocomplete extends Controller {
     target.setAttribute("aria-selected", "true")
     target.classList.add(...this.selectedClassesOrDefault)
     this.inputTarget.setAttribute("aria-activedescendant", target.id)
-    target.scrollIntoView({ behavior: "smooth", block: "nearest" })
+    target.scrollIntoView({ behavior: "auto", block: "nearest" })
   }
 
   onKeydown = (event) => {
