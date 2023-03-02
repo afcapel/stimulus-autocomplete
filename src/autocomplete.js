@@ -11,6 +11,7 @@ export default class Autocomplete extends Controller {
     submitOnEnter: Boolean,
     url: String,
     minLength: Number,
+    options: Array,
     delay: { type: Number, default: 300 },
     queryParam: { type: String, default: "q" },
   }
@@ -192,12 +193,10 @@ export default class Autocomplete extends Controller {
   }
 
   fetchResults = async (query) => {
-    if (!this.hasUrlValue) return
-
-    const url = this.buildURL(query)
     try {
       this.element.dispatchEvent(new CustomEvent("loadstart"))
-      const html = await this.doFetch(url)
+      const html = await this.hasOptionsValue ? this.fetchLocalOptions(query) : this.fetchRemoteResults(query)
+
       this.replaceResults(html)
       this.element.dispatchEvent(new CustomEvent("load"))
       this.element.dispatchEvent(new CustomEvent("loadend"))
@@ -206,6 +205,28 @@ export default class Autocomplete extends Controller {
       this.element.dispatchEvent(new CustomEvent("loadend"))
       throw error
     }
+  }
+
+  fetchLocalOptions = (query) => {
+    const parsedQuery = query.trim().toLowerCase()
+    const matchingOptions = this.optionsValue.filter(o => this.optionMatches(parsedQuery, o))
+
+    return matchingOptions.map(o => this.decorateResult(o)).join('\n')
+  }
+
+  optionMatches(query, option) {
+    return option.toLowerCase().includes(query)
+  }
+
+  decorateResult = (result) => {
+    return `<li data-autocomplete-value="${result}" role="option" class="list-group-item"><span class="label">${result}</span></li>`
+  }
+
+  fetchRemoteResults = async (query) => {
+    if (!this.hasUrlValue) return
+
+    const url = this.buildURL(query)
+    return await this.doFetch(url)
   }
 
   buildURL(query) {
@@ -224,8 +245,7 @@ export default class Autocomplete extends Controller {
       throw new Error(`Server responded with status ${response.status}`)
     }
 
-    const html = await response.text()
-    return html
+    return await response.text()
   }
 
   replaceResults(html) {
