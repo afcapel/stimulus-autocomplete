@@ -10,7 +10,7 @@ export default class Autocomplete extends Controller {
     ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
-    minLength: Number,
+    minLength: { type: Number, default: 1},
     delay: { type: Number, default: 300 },
     queryParam: { type: String, default: "q" },
   }
@@ -188,7 +188,7 @@ export default class Autocomplete extends Controller {
 
   hideAndRemoveOptions() {
     this.close()
-    this.resultsTarget.innerHTML = null
+    this.resultsTarget.innerHTML = ""
   }
 
   fetchResults = async (query) => {
@@ -229,7 +229,13 @@ export default class Autocomplete extends Controller {
   }
 
   replaceResults(html) {
-    this.resultsTarget.innerHTML = html
+    // Double check input length at the last moment to prevent stale results from being shown
+    // should the user delete characters faster than the server responds.
+    if (this.inputTarget.value.length >= this.minLengthValue) {
+      this.resultsTarget.innerHTML = html
+    } else {
+      this.resultsTarget.innerHTML = ""
+    }
     this.identifyOptions()
     if (!!this.options) {
       this.open()
