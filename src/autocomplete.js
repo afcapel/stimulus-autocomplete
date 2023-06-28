@@ -173,7 +173,7 @@ export default class Autocomplete extends Controller {
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
 
     const query = this.inputTarget.value.trim()
-    if (query && query.length >= this.minLengthValue) {
+    if (query.length >= this.minLengthValue) {
       this.fetchResults(query)
     } else {
       this.hideAndRemoveOptions()
