@@ -16,40 +16,43 @@ export default class Autocomplete extends Controller {
   }
   static uniqOptionId = 0
 
-  connect() {
-    this.close()
-
-    if(!this.inputTarget.hasAttribute("autocomplete")) this.inputTarget.setAttribute("autocomplete", "off")
-    this.inputTarget.setAttribute("spellcheck", "false")
-
-    this.mouseDown = false
-
+  initialize() {
     this.onInputChange = debounce(this.onInputChange, this.delayValue)
-
-    this.inputTarget.addEventListener("keydown", this.onKeydown)
-    this.inputTarget.addEventListener("blur", this.onInputBlur)
-    this.inputTarget.addEventListener("input", this.onInputChange)
-    this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
-    this.resultsTarget.addEventListener("click", this.onResultsClick)
-
-    if (this.inputTarget.hasAttribute("autofocus")) {
-      this.inputTarget.focus()
-    }
-
+    this.mouseDown = false
     this.readyValue = true
   }
 
-  disconnect() {
-    if (this.hasInputTarget) {
-      this.inputTarget.removeEventListener("keydown", this.onKeydown)
-      this.inputTarget.removeEventListener("blur", this.onInputBlur)
-      this.inputTarget.removeEventListener("input", this.onInputChange)
-    }
+  connect() {
+    this.close()
+  }
 
-    if (this.hasResultsTarget) {
-      this.resultsTarget.removeEventListener("mousedown", this.onResultsMouseDown)
-      this.resultsTarget.removeEventListener("click", this.onResultsClick)
+  resultsTargetConnected(target) {
+    target.addEventListener("mousedown", this.onResultsMouseDown)
+    target.addEventListener("click", this.onResultsClick)
+  }
+
+  resultsTargetDisconnected(target) {
+    target.removeEventListener("mousedown", this.onResultsMouseDown)
+    target.removeEventListener("click", this.onResultsClick)
+  }
+
+  inputTargetConnected(target) {
+    if(!target.hasAttribute("autocomplete")) target.setAttribute("autocomplete", "off")
+    target.setAttribute("spellcheck", "false")
+
+    target.addEventListener("keydown", this.onKeydown)
+    target.addEventListener("blur", this.onInputBlur)
+    target.addEventListener("input", this.onInputChange)
+
+    if (target.hasAttribute("autofocus")) {
+      target.focus()
     }
+  }
+
+  inputTargetDisconnected(target) {
+    target.removeEventListener("keydown", this.onKeydown)
+    target.removeEventListener("blur", this.onInputBlur)
+    target.removeEventListener("input", this.onInputChange)
   }
 
   sibling(next) {
