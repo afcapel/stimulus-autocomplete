@@ -30,6 +30,7 @@ export default class Autocomplete extends Controller {
     this.inputTarget.addEventListener("blur", this.onInputBlur)
     this.inputTarget.addEventListener("input", this.onInputChange)
     this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
+    this.resultsTarget.addEventListener("mouseover", this.onResultsMouseOver)
     this.resultsTarget.addEventListener("click", this.onResultsClick)
 
     if (this.inputTarget.hasAttribute("autofocus")) {
@@ -167,6 +168,12 @@ export default class Autocomplete extends Controller {
     this.resultsTarget.addEventListener("mouseup", () => {
       this.mouseDown = false
     }, { once: true })
+  }
+
+  onResultsMouseOver = (event) => {
+    if (!(event.target instanceof Element)) return;
+    const selected = event.target.closest(optionSelector);
+    if (selected) this.select(selected);
   }
 
   onInputChange = () => {
