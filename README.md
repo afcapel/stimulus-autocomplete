@@ -155,6 +155,47 @@ class CustomAutocomplete extends Autocomplete {
 application.register('autocomplete', CustomAutocomplete)
 ```
 
+### Tailwind css
+
+The autcomplete default css is Bootstrap, If you use another css framework such as Tailwind css or so on, You can customize Autocomplete.js with html.
+
+
+```javascript
+# app/javascript/controllers/application.js
+
+import { Application } from "@hotwired/stimulus"
+import { Autocomplete } from 'stimulus-autocomplete'
+
+const application = Application.start()
+
+class CustomAutocomplete extends Autocomplete {
+
+    get selectedClassesOrDefault() {
+        return this.hasSelectedClass ? this.selectedClasses : ["bg-teal-200"] # cursor color is bg-teal-200, you can change this code.
+    }
+}
+
+application.register('autocomplete', CustomAutocomplete)
+
+```
+
+```html
+# your ajax autocomplete url's result
+
+  <li class="list-group-item p-2" role="option" data-autocomplete-value="<%= p.text %>"><%= p.text %></li>
+```
+
+```html
+# Search Input HTML
+
+<div data-controller="autocomplete" data-autocomplete-url-value="/autocomplete" role="combobox" data-autocomplete-query-param-value="keyword">
+    <input class="w-64" type="text" data-autocomplete-target="input"/>
+    <input type="hidden" name="bird_id" data-autocomplete-target="hidden"/>
+    <ul class="w-64 divide-y border" data-autocomplete-target="results"></ul>
+</div>
+```
+
+
 ## Examples
 
 - [The examples directory](https://github.com/afcapel/stimulus-autocomplete/tree/main/examples) contains some examples of how to use the library.
