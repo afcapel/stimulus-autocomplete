@@ -10,33 +10,32 @@ export default class Autocomplete extends Controller {
     ready: Boolean,
     submitOnEnter: Boolean,
     url: String,
-    minLength: Number,
+    minLength: { type: Number, default: 1 },
     delay: { type: Number, default: 300 },
     queryParam: { type: String, default: "q" },
-  }
+  };
   static uniqOptionId = 0
 
   connect() {
-    this.close()
+    this.close();
 
-    if(!this.inputTarget.hasAttribute("autocomplete")) this.inputTarget.setAttribute("autocomplete", "off")
-    this.inputTarget.setAttribute("spellcheck", "false")
+    if (!this.inputTarget.hasAttribute("autocomplete")) this.inputTarget.setAttribute("autocomplete", "off");
+    this.inputTarget.setAttribute("spellcheck", "false");
 
-    this.mouseDown = false
+    this.mouseDown = false;
 
-    this.onInputChange = debounce(this.onInputChange, this.delayValue)
+    this.onInputChange = debounce(this.onInputChange, this.delayValue);
 
-    this.inputTarget.addEventListener("keydown", this.onKeydown)
-    this.inputTarget.addEventListener("blur", this.onInputBlur)
-    this.inputTarget.addEventListener("input", this.onInputChange)
-    this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown)
-    this.resultsTarget.addEventListener("click", this.onResultsClick)
+    this.inputTarget.addEventListener("keydown", this.onKeydown);
+    this.inputTarget.addEventListener("blur", this.onInputBlur);
+    this.inputTarget.addEventListener("input", this.onInputChange);
+    this.resultsTarget.addEventListener("mousedown", this.onResultsMouseDown);
+    this.resultsTarget.addEventListener("click", this.onResultsClick);
+    this.inputTarget.addEventListener("focusin", this.onFocus);
 
     if (this.inputTarget.hasAttribute("autofocus")) {
-      this.inputTarget.focus()
+      this.inputTarget.focus();
     }
-
-    this.readyValue = true
   }
 
   disconnect() {
@@ -168,6 +167,15 @@ export default class Autocomplete extends Controller {
       this.mouseDown = false
     }, { once: true })
   }
+
+  onFocus = () => {
+    if (this.hiddenTarget.value) return;
+
+    const query = this.inputTarget.value.trim();
+    if (query && query.length >= this.minLengthValue) {
+      this.fetchResults(query);
+    }
+  };
 
   onInputChange = () => {
     if (this.hasHiddenTarget) this.hiddenTarget.value = ""
