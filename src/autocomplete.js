@@ -16,6 +16,8 @@ export default class Autocomplete extends Controller {
   }
   static uniqOptionId = 0
 
+  #latestFetchAt = null
+
   connect() {
     this.close()
 
@@ -197,7 +199,10 @@ export default class Autocomplete extends Controller {
     const url = this.buildURL(query)
     try {
       this.element.dispatchEvent(new CustomEvent("loadstart"))
+      const currentFetchAt = new Date
       const html = await this.doFetch(url)
+      if (this.#latestFetchAt && this.#latestFetchAt > currentFetchAt) return
+      this.#latestFetchAt = currentFetchAt
       this.replaceResults(html)
       this.element.dispatchEvent(new CustomEvent("load"))
       this.element.dispatchEvent(new CustomEvent("loadend"))
